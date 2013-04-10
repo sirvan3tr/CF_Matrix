@@ -1,0 +1,186 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+	color: #666;
+	background-color: #fff;
+}
+/* General
+------------------------------------------------------ */
+.clear {
+	clear: both;
+}
+
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+/* nav
+------------------------------------------------------ */
+.navbar {
+	margin-bottom: 5px;
+	overflow: visible;
+}
+
+/* Main Page date
+------------------------------------------------------ */
+.date {
+	text-align: center;
+	width: 130px;
+	//color: #fff;
+	//background-color:#666;
+	padding: 10px;
+	font-size: 12px;
+	height: 100%;
+	background-color: #fff;
+}
+.date .day {
+	font-weight: bold;
+	font-size: 16px;
+}
+.todaysdate {
+	color: #fff;
+	background: rgb(203,96,179); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(203,96,179,1) 0%, rgba(173,18,131,1) 50%, rgba(222,71,172,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(203,96,179,1)), color-stop(50%,rgba(173,18,131,1)), color-stop(100%,rgba(222,71,172,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(203,96,179,1) 0%,rgba(173,18,131,1) 50%,rgba(222,71,172,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(203,96,179,1) 0%,rgba(173,18,131,1) 50%,rgba(222,71,172,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(203,96,179,1) 0%,rgba(173,18,131,1) 50%,rgba(222,71,172,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(203,96,179,1) 0%,rgba(173,18,131,1) 50%,rgba(222,71,172,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cb60b3', endColorstr='#de47ac',GradientType=0 ); /* IE6-9 */
+}
+.dateheader {
+	//background-color: #FFBB45;
+}
+.weekendsdate {
+	opacity: 0.25;
+}
+.username {
+	/*float: left;*/
+	line-height: 40px;
+	text-align: center;
+	margin: 0 4px 0 0;
+	width: 220px;
+	cursor: pointer;
+	color: #fff;
+	//background-color:#666;
+}
+.allusers {
+	padding-left: 152px;
+	border-bottom: 1px dotted #666;
+}
+.tasks {
+	padding: 5px;
+	background-color: #fff;
+	cursor: pointer;
+	margin-bottom: 2px;
+	width: 220px;
+	position: relative;
+	border: 1px solid #f6f6f6;
+}
+.matrix-row {
+	border-bottom: 1px solid #ddd;
+	padding: 5px 0 5px 0;
+}
+.matrixdetails {
+	display: none;
+}
+.alltasks {
+	vertical-align: top;
+	padding: 15px;
+	border-left: 1px solid #f3f3f3;
+}
+.task-addition {
+	color:#fff;
+	cursor:pointer;
+}
+.task-addition:hover {
+	border: 1px dashed grey;
+	color:#666;
+}
+.newtaskform {
+	display:none;
+}
+.totalend {
+	display: block;
+	line-height: 20px;
+	text-align: right;
+	padding-right: 4px;
+	//background:url("../img/avail-meter.jpg") no-repeat;
+}
+.booked {
+	border-top:1px solid green;
+
+}
+.underbooked {
+	border-top:1px solid orange;
+
+}
+.overbooked {
+	border-top:1px solid red;
+}
+.matrixhours {
+	text-align: right;
+	display: inline-block;
+	background: #ddd;
+	font-size: 10px;
+	padding: 0 4px;
+	border-radius: 5px;
+}
+.matrixrows {
+	border-bottom: 6px solid #fff;
+}
+.removetask {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: #fff;
+}
+/*
+.defaulttableview tr:nth-child(odd)		{ background-color:#f6f6f6; }
+.defaulttableview tr:nth-child(even)		{ background-color:#fff; }
+*/
+
+.container-fluid {
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+
+
+.projecthours {
+	width: 200px;
+	//padding-bottom: 20px;
+	border:1px solid #ddd;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 24px;
+	margin-bottom: 5px;
+}
+.projecthours .content {
+	padding: 10px;
+}
+.hrsspent {
+	font-size: 18px;
+	position: relative;
+	top: -10px;
+}
+.totalhrs {
+	position: relative;
+	top: 10px;
+}
+.hrsannotation {
+	font-size: 10px;
+}
+.projecthours .header {
+	background-color: #f7f7f7;
+	padding: 10px;
+	text-align: left;
+	border-radius: 5px;
+	margin: 0;
+}
+.smallcontent {
+	padding: 5px;
+	font-size: 14px;
+}
