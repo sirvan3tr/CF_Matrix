@@ -9,7 +9,9 @@
             stroke: #fff;
           }
           </style>
-
+          <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jqPlotplugins/jqplot.pieRenderer.min.js"></script>
+    <script type="text/javascript" src="js/jqPlotplugins/jqplot.donutRenderer.min.js"></script>
             <?php
             include('config.php');
 
