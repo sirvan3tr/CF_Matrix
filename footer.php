@@ -1,8 +1,6 @@
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
-<script src="js/ZeroClipboard-1.1.7/ZeroClipboard.js"></script>
-<script src="js/ZeroClipboard-1.1.7/main.js"></script>
 
 <script>
 jQuery(function ($) {
@@ -32,9 +30,6 @@ jQuery(function ($) {
           });
         }); // End of task details click
 
-          $(".copy-button").click(function() {
-              copyButton = this;
-          })
       } // Success function
     }); // Ajax Function
   }

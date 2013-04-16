@@ -1,56 +1,49 @@
 <?php include('header.php'); ?>
-    <div class="container-fluid">
-      <div class="row-fluid">
-       
-        <div class="span6">
+
+
+
+
+<style>
+.arc path {
+  stroke: #fff;
+}
+</style>
+
+<?php
+include('config.php');
+
+$projectid = $_GET['projectid'];
+$user = mysqli_query($con,"SELECT * FROM tasks WHERE id='$projectid'");
+$projectrow = mysqli_fetch_array($user);
+$totalhrs = $projectrow['total_hrs'];
+$hrsspent = $projectrow['hrs_spent'];
+$totalgbp = $projectrow['gbp_total_amount'];
+$hrsremaining = $totalhrs - $hrsspent;
+$rate = round($totalgbp/$totalhrs,3);
+$perchrsspent = round(($hrsspent/$totalhrs)*100, 3);
+$profit = $totalgbp-($rate*$hrsspent);
+$cost = $totalgbp - $profit;
+?>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+    <div class="container">
+      <div class="row">
+
+        <div class="span3">
           <!--Body content-->
-          <style>
-          .arc path {
-            stroke: #fff;
-          }
-          </style>
-          <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jqPlotplugins/jqplot.pieRenderer.min.js"></script>
-    <script type="text/javascript" src="js/jqPlotplugins/jqplot.donutRenderer.min.js"></script>
+
             <?php
-            include('config.php');
-
-            $projectid = $_GET['projectid'];
-            $user = mysqli_query($con,"SELECT * FROM tasks WHERE id='$projectid'");
-            $projectrow = mysqli_fetch_array($user);
-            echo '<h1>'.$projectrow['name']. ' [' .$projectrow['status']. ']</h1>';
-            echo '<h5>Project number: '.$projectrow['project_number']. '</h5>';
-
-            $totalhrs = $projectrow['total_hrs'];
-            $hrsspent = $projectrow['hrs_spent'];
-            $totalgbp = $projectrow['gbp_total_amount'];
-            $rate = round($totalgbp/$totalhrs,3);
-            $perchrsspent = round(($hrsspent/$totalhrs)*100, 3);
-            $profit = $totalgbp-($rate*$hrsspent);
-
-            echo '<div class="projecthours">
-                    <h4>Profit</h4>
-                    <div class="content text-info">
-                      &#163;'.$profit.' <br />
-                    </div>
-                    <div class="smallcontent">
-                      This figure is purely based on hours and the hourly rate.
-                    </div>
-                  </div>';
-
-
-        echo "</div>";
-        echo '<div class="span6">';
-
-
             echo '<div class="projecthours">
                     <h4 class="header"><i class="icon-time"></i> Hours</h4>
                     <div class="content">
                       <span class="hrsspent" title="Amount of hours that have been spent.">'.$hrsspent.'</span>/<span class="totalhrs" title="Total amount of hours available.">'.$totalhrs.'<span class="hrsannotation">total hrs</a></span>
                       <hr />
                       <div class="smallcontent text-info"><strong>'.$perchrsspent.'%</strong> of available hours have been used</div>
+                      
                     </div>
                   </div>';
+            echo '<div style="height:200px;" id="chart1"></div>';
 
             echo '<div class="projecthours">
                     <h4 class="header">Rate</h4>
@@ -66,105 +59,107 @@
                     </div>
             </div>';
 
-
-
-            
-
-            /*
-            $filename = tempnam('temp/', 'data').'.csv';
-
-            $handle = fopen($filename, "w");
-            fwrite($handle, "age,population\n");
-            
-            $searchdate = '2013-03-25';
-            $result = mysqli_query($con,"SELECT * FROM task_repetition WHERE date='$searchdate' && user_id='$userid'");
-            $results = array();
-
-              $totalhours = 0;
-              while($row = mysqli_fetch_array($result)) {
-
-                $totalhours = $totalhours + $row['duration'];
-                $taskid = $row['task_id'];
-                $taskname = mysqli_query($con,"SELECT * FROM tasks WHERE id='$taskid'");
-                while($row2 = mysqli_fetch_array($taskname)) {
-                  echo $row2['name'] . ',';
-                   fwrite($handle, $row2['name'] .'(' . $row['duration'] . ") ,");
-                }
-                fwrite($handle, $row['duration'] . "\n");
-                echo $row['duration'] . '<br />';
-
-                $results[] = $row['duration'];
-              }
-              $freetime = 0;
-              if ($totalhours < 7.5) {
-                $freetime = 7.5 - $totalhours;
-                fwrite($handle, 'Free time,' . $freetime . "\n");
-              }
-              echo "Toal hours: <strong>".$totalhours."</strong><br />";
-              echo "Toal free hours: <strong>".$freetime."</strong>";
-
-            fclose($handle);
-            */
+        echo "</div>"; // /Span3
+        echo '<div class="span9">';
+            echo '<h1>'.$projectrow['name']. ' [' .$projectrow['status']. ']</h1>';
+            echo '<h5>Project number: '.$projectrow['project_number']. '</h5>';
+            echo '<div class="projecthours">
+                    <h4>Profit</h4>
+                    <div class="content text-info">
+                      &#163;'.$profit.' <br />
+                    </div>
+                    <div class="smallcontent">
+                      This figure is purely based on hours and the hourly rate.
+                      <div style="height:200px;" id="chart2"></div>
+                    </div>
+                  </div>';
             ?>
 
-          <script src="http://d3js.org/d3.v3.min.js"></script>
-          <script>
-          var width = 200,
-              height = 200,
-              radius = Math.min(width, height) / 2;
-
-          var color = d3.scale.ordinal()
-              .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
-
-          var arc = d3.svg.arc()
-              .outerRadius(radius - 10)
-              .innerRadius(0);
-
-          var pie = d3.layout.pie()
-              .sort(null)
-              .value(function(d) { return d.population; });
-
-          var svg = d3.select("body").append("svg")
-              .attr("width", width)
-              .attr("height", height)
-            .append("g")
-              .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-          d3.csv("<?php echo 'temp/'.basename($filename); ?>", function(error, data) {
-
-            data.forEach(function(d) {
-              d.population = +d.population;
-            });
-
-            var g = svg.selectAll(".arc")
-                .data(pie(data))
-              .enter().append("g")
-                .attr("class", "arc");
-
-            g.append("path")
-                .attr("d", arc)
-                .style("fill", function(d) {
-                  if (d.data.age == "Free time") {
-                    return "#fff"
-                  } else {
-                    return color(d.data.age);
-                  }
-                });
-
-            g.append("text")
-                .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-                .attr("dy", ".35em")
-                .style("text-anchor", "middle")
-                .text(function(d) { return d.data.age; });
-
-          });
-
-          </script>
-          <?php //delete our temp file
-          //unlink($filename);
-          ?>
          
         </div><!-- /span12 -->
       </div>
     </div>
+
+<script class="code"  type="text/javascript">
+$(document).ready(function(){
+  var data = [
+    ['Hours Spent', <?php echo $hrsspent; ?>],['Hours Remaining', <?php echo $hrsremaining; ?>]
+  ];
+
+
+  var plot1 = jQuery.jqplot ('chart1', [data],  {
+     grid: {
+            background: 'rgba(57,57,57,0.0)',
+            drawBorder: false,
+            shadow: false,
+            gridLineColor: '#666666',
+            gridLineWidth: 1
+        },
+      gridPadding: {top:0, bottom:0, left:0, right:0},
+      seriesDefaults: {
+        // Make this a pie chart.
+        renderer: jQuery.jqplot.PieRenderer, 
+        rendererOptions: {
+          // Put data labels on the pie slices.
+          // By default, labels show the percentage of the slice.
+          showDataLabels: true,
+          shadow: false,
+          padding: 0,
+          sliceMargin: 1,
+        }
+      }, 
+        legend: {
+            show: true,
+            location:'s',
+             rendererOptions: {
+                numberRows: 1
+            },
+        }
+    }
+  );
+});
+</script>
+<script class="code"  type="text/javascript">
+$(document).ready(function(){
+  var data = [
+    ['Cost', <?php echo $cost; ?>],['Profit', <?php echo $profit; ?>]
+  ];
+
+
+  var plot1 = jQuery.jqplot ('chart2', [data],  {
+     grid: {
+            background: 'rgba(57,57,57,0.0)',
+            drawBorder: false,
+            shadow: false,
+            gridLineColor: '#666666',
+            gridLineWidth: 1
+        },
+      gridPadding: {top:0, bottom:0, left:0, right:0},
+      seriesDefaults: {
+        // Make this a pie chart.
+        renderer: jQuery.jqplot.PieRenderer, 
+        rendererOptions: {
+          // Put data labels on the pie slices.
+          // By default, labels show the percentage of the slice.
+          showDataLabels: true,
+          shadow: false,
+          padding: 0,
+          sliceMargin: 1,
+        }
+      }, 
+        legend: {
+            show: true,
+            location:'s',
+             rendererOptions: {
+                numberRows: 1
+            },
+        }
+    }
+  );
+});
+</script>
+<link class="include" rel="stylesheet" type="text/css" href="plugins/jqPlot/jquery.jqplot.min.css" />
+<!--[if lt IE 9]><script language="javascript" type="text/javascript" src="plugins/jgPlot/excanvas.js"></script><![endif]-->
+<script class="include" type="text/javascript" src="plugins/jqPlot/jquery.jqplot.min.js"></script>
+<script class="include" type="text/javascript" src="plugins/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
 <?php include('footer.php'); ?>

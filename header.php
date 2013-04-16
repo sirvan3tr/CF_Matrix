@@ -7,9 +7,10 @@
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link href="css/datepicker.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="css/Style.css" rel="stylesheet">
+    
     
   </head>
   <body>
