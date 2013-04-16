@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 15, 2013 at 05:27 PM
+-- Generation Time: Apr 16, 2013 at 05:23 PM
 -- Server version: 5.5.24
 -- PHP Version: 5.3.10-1ubuntu3.4
 
@@ -62,6 +62,37 @@ INSERT INTO `tasks` (`id`, `name`, `Contact`, `redmine_url`, `n_url`, `status`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `taskss`
+--
+
+DROP TABLE IF EXISTS `taskss`;
+CREATE TABLE IF NOT EXISTS `taskss` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `job_nr` varchar(50) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  `client_name` varchar(50) DEFAULT NULL,
+  `project_name` varchar(50) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `hours` varchar(50) DEFAULT NULL,
+  `total_amount` varchar(50) DEFAULT NULL,
+  `payment_terms` varchar(50) DEFAULT NULL,
+  `start_date` varchar(50) DEFAULT NULL,
+  `estimated_end_date` varchar(50) DEFAULT NULL,
+  `sold_by` varchar(50) DEFAULT NULL,
+  `month_of_sale` varchar(50) DEFAULT NULL,
+  `project_manager` varchar(50) DEFAULT NULL,
+  `attached_project` varchar(50) DEFAULT NULL,
+  `po` varchar(50) DEFAULT NULL,
+  `third_party_costs` varchar(50) DEFAULT NULL,
+  `client_main_contact` varchar(50) DEFAULT NULL,
+  `contact_details` varchar(50) DEFAULT NULL,
+  `notes` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `task_repetition`
 --
 
@@ -73,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `task_repetition` (
   `user_id` int(11) NOT NULL,
   `duration` decimal(10,2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 --
 -- Dumping data for table `task_repetition`
@@ -110,7 +141,12 @@ INSERT INTO `task_repetition` (`id`, `task_id`, `date`, `user_id`, `duration`) V
 (28, 2, '2013-03-27', 1, 5.00),
 (29, 1, '2013-03-28', 1, 2.00),
 (30, 1, '2013-03-28', 1, 4.00),
-(31, 1, '2013-03-25', 2, 2.00);
+(31, 1, '2013-03-25', 2, 2.00),
+(32, 1, '2013-04-15', 1, 2.50),
+(33, 2, '2013-04-15', 1, 2.60),
+(34, 1, '2013-04-15', 1, 2.50),
+(35, 1, '2013-04-15', 2, 2.50),
+(36, 2, '2013-04-15', 2, 5.00);
 
 -- --------------------------------------------------------
 

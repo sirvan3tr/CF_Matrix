@@ -60,7 +60,7 @@
 
                           //echo '<div class="username">' . $row['firstname'] . " " . $row['surname'] . '</div>';
                          $repetition = mysqli_query($con,"SELECT * FROM task_repetition WHERE date='$testdate' && user_id='$userid' ");
-                         echo '<td date="'.$testdate.'" userid="'.$userid.'" id="id'.$testdate.$userid.'" class="alltasks">';
+                         echo '<td class="alltasks">';
                          $taskhours = 0;
                            while($rowtwo = mysqli_fetch_array($repetition))
                               {
@@ -133,7 +133,7 @@
 
 <script>
 $(document).ready(function() {
-                           
+
   $(".task-addition").click(function() {
     $(this).next().show();
     userid = $(this).attr('userid');
