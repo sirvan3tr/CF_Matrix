@@ -60,11 +60,8 @@
 
                           //echo '<div class="username">' . $row['firstname'] . " " . $row['surname'] . '</div>';
                          $repetition = mysqli_query($con,"SELECT * FROM task_repetition WHERE date='$testdate' && user_id='$userid' ");
-                         echo '<td date="'.$testdate.'" userid="'.$userid.'" id="id'.$testdate.$userid.'" class="alltasks">';
+                         echo '<td class="alltasks">';
                          $taskhours = 0;
-
-
-
                            while($rowtwo = mysqli_fetch_array($repetition))
                               {
                                 $taskhours = $taskhours + $rowtwo['duration'];
@@ -77,13 +74,6 @@
                                 $contactsid = $taskfinderchild['Contact'];
                                 $contactfinder = mysqli_query($con,"SELECT * FROM users WHERE id='$contactsid' ");
                                 $contactfinderarray = mysqli_fetch_array($contactfinder);
-
-
-
-                                $piechartarray = array("Dog","Cat");
-                                $piechartarray[$taskfinderchild['name']] = 'hello';
-
-                                
 
                                 echo '<div class="tasks"><span class="matrixtaskname fl">' . $taskfinderchild['name'] .  '</span><span class="matrixhours fr"><i class="icon-time"></i> ' . $rowtwo['duration'] . '</span>
                                 <div class="clear"></div>
@@ -103,9 +93,7 @@
                               } else {
                                 echo '<div class="totalend underbooked">Total hrs: '.$taskhours.'</div>';
                               }
-                              print_r($piechartarray);
                               echo '<p class="text-center task-addition" userid="' . $row['id'] .'" username="' . $row['firstname'] . $row['surname'] . '"  date="'.$testdate.'" >Add new task!</p>';
-                              
                               ?>
                                 <div class="newtaskform">
                                   <form>
@@ -145,7 +133,7 @@
 
 <script>
 $(document).ready(function() {
-                           
+
   $(".task-addition").click(function() {
     $(this).next().show();
     userid = $(this).attr('userid');
