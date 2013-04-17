@@ -1,6 +1,32 @@
-<?php						
-		 	$start_date = $_POST['firstdate'];
-		 	$end_date = $_POST['seconddate'];
+<?php
+include('header.php');
+?>
+    <div class="container-fluid">
+      <div class="row-fluid">
+       
+        <div class="span12">
+          <!--Body content-->
+          <form class="form-inline">
+            <?php
+            include('config.php');
+            $result = mysqli_query($con,"SELECT * FROM users");
+             
+
+            $todaysdate = date('Y-m-d');
+            $firstdate = date('Y-m-d', strtotime('-5 day', strtotime($todaysdate)));
+            $seconddate = date('Y-m-d', strtotime('+5 day', strtotime($todaysdate)));
+            echo '<input id="firstdate" type="text" placeholder="From y-m-d" value="'.$firstdate.'" class="input-small"> ';
+            echo '<input id="seconddate" type="text" placeholder="To y-m-d" value="'.$seconddate.'" class="input-small"> ';
+            echo '<select>
+                    <option>All users</option>';
+              while($row = mysqli_fetch_array($result)) {
+                echo '<option>' . $row['firstname'] . " " . $row['surname'] . '</option>';
+              }
+
+            echo '</select> ';
+
+            $start_date = "2013-04-12";
+      $end_date = "2013-04-22";
     
 $todaysdate = date('Y-m-d');
 if ( !$end_date ) 
@@ -107,7 +133,7 @@ do
                             }
                         ?>
                       </select>
-                      <div class="btn newtask" <?php echo 'date="'.$testdate.'"' ?>>Submit</div>
+                      <button type="submit" class="btn newtask" <?php echo 'date="'.$testdate.'"' ?>>Submit</button>
                     </fieldset>
                   </form>
                 </div> <!-- /newtaskform -->
@@ -127,6 +153,92 @@ echo '</table>';
 <script>
 $(document).ready(function() {
                            
+  $(".task-addition").click(function() {
+    $(this).next().show();
+    userid = $(this).attr('userid');
 
+
+    $('.newtask').click(function () {
+      parent = $(this).parent();
+
+      hours = $(parent).find('.allocated-hours').val();
+      console.log(hours);
+
+      task = $(parent).find('.selected-task');
+      taskid = $("option:selected", task).attr("taskid");  
+
+      date = $(this).attr('date');
+      //Ajax function
+      $.ajax({ url: 'new_task_script.php',
+          data: {hours: hours, taskid: taskid, userid: userid, date: date},
+          type: 'post',
+          success: function(data) {
+            alert(data);
+
+          } // Success function
+      }); // Ajax Function
+    }) // Click fn
+
+    $('.removetask').click(function() {
+      taskid = $(this).attr('taskid');
+      console.log(taskid);
+
+    }) //removetask click fn
+
+  }) // Click fn
 })
 </script>
+            ?>
+            <button id="date_btn" class="btn btn-small btn-primary" type="button">Filter</button>
+          </form>
+              
+              <div id="msg"></div>
+        </div><!-- /span12 -->
+      </div>
+    </div>
+<script>
+  jQuery(function ($) {
+  $('#firstdate').datepicker({
+  format: 'yyyy-mm-dd'
+  });
+  $('#seconddate').datepicker({
+  format: 'yyyy-mm-dd'
+  });
+
+  var dateajax = function() {
+    firstdate = $("#firstdate").val();
+    seconddate = $("#seconddate").val();
+
+    //Ajax function
+    $.ajax({ url: 'date_script.php',
+      data: {firstdate: firstdate, seconddate: seconddate},
+      type: 'post',
+      beforeSend: function(){
+        $("#loading").show();
+      },
+      success: function(data) {
+        $("#loading").hide();
+        $("#msg").html(data);
+
+        // Toggle Task Details
+        $(".tasks").click(function() {
+          $(this).find('.matrixdetails').toggle('fast', function() {
+          // Animation complete.
+          });
+        }); // End of task details click
+
+      }, // Success function
+    }); // Ajax Function
+  }
+
+    //dateajax();
+
+  $("#date_btn").click(function(){
+    dateajax();
+  });
+
+  });
+</script>
+<?php
+include('footer.php');
+?>

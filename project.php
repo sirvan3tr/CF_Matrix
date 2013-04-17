@@ -15,7 +15,7 @@ include('config.php');
 $projectid = $_GET['projectid'];
 $user = mysqli_query($con,"SELECT * FROM tasks WHERE id='$projectid'");
 $projectrow = mysqli_fetch_array($user);
-$totalhrs = $projectrow['total_hrs'];
+$totalhrs = $projectrow['hours'];
 $hrsspent = $projectrow['hrs_spent'];
 $totalgbp = $projectrow['gbp_total_amount'];
 $hrsremaining = $totalhrs - $hrsspent;
@@ -61,8 +61,8 @@ $cost = $totalgbp - $profit;
 
         echo "</div>"; // /Span3
         echo '<div class="span9">';
-            echo '<h1>'.$projectrow['name']. ' [' .$projectrow['status']. ']</h1>';
-            echo '<h5>Project number: '.$projectrow['project_number']. '</h5>';
+            echo '<h1>'.$projectrow['project_name']. ' [' .$projectrow['status']. ']</h1>';
+            echo '<h5>Project number: '.$projectrow['job_nr']. '</h5>';
             echo '<div class="projecthours">
                     <h4>Profit</h4>
                     <div class="content text-info">

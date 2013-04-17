@@ -49,7 +49,11 @@ include('header.php');
     $.ajax({ url: 'date_script.php',
       data: {firstdate: firstdate, seconddate: seconddate},
       type: 'post',
+      beforeSend: function(){
+        $("#loading").show();
+      },
       success: function(data) {
+        $("#loading").hide();
         $("#msg").html(data);
 
         // Toggle Task Details
@@ -59,8 +63,51 @@ include('header.php');
           });
         }); // End of task details click
 
-      } // Success function
-    }); // Ajax Function
+      }, // Success function
+    }).done(function(data){
+                        $(".task-addition").click(function() {
+                          $(this).next().show();
+                          userid = $(this).attr('userid');
+
+
+                          $('.newtask').click(function () {
+                            parent = $(this).parent();
+
+                            hours = $(parent).find('.allocated-hours').val();
+
+                            task = $(parent).find('.selected-task');
+                            taskid = $("option:selected", task).attr("taskid");  
+
+                            date = $(this).attr('date');
+
+
+                            //Ajax function
+                            $.ajax({ url: 'new_task_script.php',
+                                type: 'post',
+                                data: {hours: hours, taskid: taskid, userid: userid, date: date},
+                                 beforeSend: function ( xhr ) {
+                                xhr.overrideMimeType("text/plain; charset=x-user-defined");
+                                },
+                                success: function(data) {
+                                    alert("success");
+
+                                },
+                                error: function (data) {
+                                    console.log(data);
+                                    alert("There was an error. Image could not be added, please try again");
+                                    
+                                } // Success function
+                            }); // Ajax Function
+                          }) // Click fn
+
+                          $('.removetask').click(function() {
+                            taskid = $(this).attr('taskid');
+                            console.log(taskid);
+
+                          }) //removetask click fn
+
+                        }) // Click fn
+    });
   }
 
     dateajax();

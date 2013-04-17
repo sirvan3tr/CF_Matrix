@@ -14,6 +14,7 @@
     
   </head>
   <body>
+    <div id="loading">Loading, Please wait...</div>
 <div id="mainnav" class="navbar">
   <div class="navbar-inner">
     <a class="brand" href="#">THE MATRIX</a>
