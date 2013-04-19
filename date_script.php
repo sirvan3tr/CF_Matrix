@@ -16,7 +16,7 @@ $end_date -= (60 * 60 * 24);
 $test_date = $start_date; 
 $day_incrementer = 1; 
 include('config.php');
-echo '<table class="defaulttableview" border="0">';
+echo '<table class="defaulttableview metrouicss" border="0">';
 echo '<tr>';
 echo '<td class="dateheader"></td>';
 $resultone = mysqli_query($con,"SELECT * FROM users");
@@ -84,6 +84,7 @@ do
                 <div class="clear"></div>
                 </div>';
               }
+              echo '<div class="NewRecord"></div>';
               if ($taskhours > 7.5) {
                 echo '<div class="totalend overbooked">Total hrs: '.$taskhours.'</div>';
               } elseif ($taskhours == 7.5) {
@@ -112,6 +113,7 @@ do
                   </form>
                 </div> <!-- /newtaskform -->
               <?php
+
           echo '</td>';
       }
       echo '<div class="clear"></div>';

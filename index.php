@@ -41,6 +41,7 @@ include('header.php');
   format: 'yyyy-mm-dd'
   });
 
+  $.ajaxSetup({ cache: false });
   var dateajax = function() {
     firstdate = $("#firstdate").val();
     seconddate = $("#seconddate").val();
@@ -57,7 +58,7 @@ include('header.php');
         $("#msg").html(data);
 
         // Toggle Task Details
-        $(".tasks").click(function() {
+        $(document).on('click', ".tasks", function () {
           $(this).find('.matrixdetails').toggle('fast', function() {
           // Animation complete.
           });
@@ -65,7 +66,7 @@ include('header.php');
 
       }, // Success function
     }).done(function(data){
-                        $(".task-addition").click(function() {
+                        $(document).on('click', ".task-addition", function () {
                           $(this).next().show();
                           userid = $(this).attr('userid');
 
@@ -89,13 +90,10 @@ include('header.php');
                                 xhr.overrideMimeType("text/plain; charset=x-user-defined");
                                 },
                                 success: function(data) {
-                                    alert("success");
-
+                                    $("#id" + date + userid).html("Loading").load("td_refresh.php", {date: date, userid: userid });
                                 },
                                 error: function (data) {
-                                    console.log(data);
                                     alert("There was an error. Image could not be added, please try again");
-                                    
                                 } // Success function
                             }); // Ajax Function
                           }) // Click fn

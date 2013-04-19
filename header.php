@@ -10,6 +10,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="css/Style.css" rel="stylesheet">
+
+    <link href="plugins/Metro-UI-CSS-master/css/modern.css" rel="stylesheet">
     
     
   </head>
