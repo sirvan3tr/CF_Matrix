@@ -24,13 +24,13 @@ include('config.php');
                 $contactfinderarray = mysqli_fetch_array($contactfinder);
 
                 
-                echo '<div class="tasks"><span class="matrixtaskname fl">' . $taskfinderchild['project_name'] .  '</span><span class="matrixhours fr"><i class="icon-time"></i> ' . $rowtwo['duration'] . '</span>
+                echo '<div class="tasks"><span class="matrixtaskname fl"><a href="project.php?projectid=' . $taskfinderchild['id'] .  '">' . $taskfinderchild['project_name'] .  '</a></span><span class="matrixhours fr"><i class="icon-time"></i> ' . $rowtwo['duration'] . '</span>
                 <div class="clear"></div>
                 <div class="matrixdetails">
                   <a href="https://mail.google.com/mail/#inbox?compose=new" title="GMAIL Contact" target="_blank"><i class="icon-user"></i> ' . $contactfinderarray['firstname'] . ' ' . $contactfinderarray['surname'] .'</a> <br /> 
                   <i class="icon-globe"></i> <a href="' . $taskfinderchild['redmine_url'] . '" title="Redmine URL" target="_blank">Redmine URL</a>
                   <i class="icon-folder-open"></i> <a class="ndrivelink copy-button" data-clipboard-text="' . $taskfinderchild['n_url'] . '" title="Clients Drive Folder" target="_blank">N Drive</a>
-                  <i taskid="'.$taskid.'"class="removetask icon-remove" title="Remove this task."></i>
+                  <i userid="' . $userid .'" date="'.$testdate.'" taskid="'.$rowtwo['id'].'"class="removetask icon-remove" title="Remove this task."></i>
                 </div>
                 <div class="clear"></div>
                 </div>';

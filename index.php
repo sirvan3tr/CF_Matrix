@@ -66,6 +66,28 @@ include('header.php');
 
       }, // Success function
     }).done(function(data){
+	                      $(document).on('click', ".removetask", function () {
+                            taskid = $(this).attr('taskid');
+                            userid = $(this).attr('userid');
+                            date = $(this).attr('date');
+
+                            //Ajax function
+                            $.ajax({ url: 'remove_task.php',
+                                type: 'post',
+                                data: {taskid: taskid},
+                                 beforeSend: function ( xhr ) {
+                                xhr.overrideMimeType("text/plain; charset=x-user-defined");
+                                },
+                                success: function(data) {
+                                    alert(data);
+                                    $("#id" + date + userid).html("Loading").load("td_refresh.php", {date: date, userid: userid });
+                                },
+                                error: function (data) {
+                                    alert("There was an error. Image could not be added, please try again");
+                                } // Success function
+                            }); // Ajax Function
+                          }) //removetask click fn
+						  
                         $(document).on('click', ".task-addition", function () {
                           $(this).next().show();
                           userid = $(this).attr('userid');
@@ -98,11 +120,7 @@ include('header.php');
                             }); // Ajax Function
                           }) // Click fn
 
-                          $('.removetask').click(function() {
-                            taskid = $(this).attr('taskid');
-                            console.log(taskid);
 
-                          }) //removetask click fn
 
                         }) // Click fn
     });
