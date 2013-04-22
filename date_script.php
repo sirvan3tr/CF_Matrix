@@ -51,6 +51,7 @@ do
           FROM task_repetition 
           INNER JOIN users ON task_repetition.user_id=users.id
           INNER JOIN tasks ON task_repetition.task_id=tasks.id
+          INNER JOIN skill_type ON task_repetition.skill_type_id=skill_type.id
           WHERE date='$testdate' && user_id='$userid' ");
 
          echo '<td date="'.$testdate.'" userid="'.$userid.'" id="id'.$testdate.$userid.'" class="alltasks">';
@@ -60,7 +61,7 @@ do
               {
                 $taskhours = $taskhours + $rowtwo['duration'];
 
-                echo '<div class="tasks"><span class="matrixtaskname fl"><a href="project.php?projectid=' . $rowtwo['id'] .  '">' . $rowtwo['project_name'] .  '</a></span><span class="matrixhours fr"><i class="icon-time"></i> ' . $rowtwo['duration'] . '</span>
+                echo '<div class="tasks"><span class="matrixtaskname fl"><span data-toggle="tooltip" title="" data-original-title="' . $rowtwo['skill_full'] . '" class="matrixhours" style="background-color:'.$rowtwo['color'].';">'. $rowtwo['skill'] . '</span> <a href="project.php?projectid=' . $rowtwo['id'] .  '">' . $rowtwo['project_name'] .  '</a></span><span class="matrixhours fr"><i class="icon-time"></i> ' . $rowtwo['duration'] . '</span>
                 <div class="clear"></div>
                 <div class="matrixdetails">
                   <a href="https://mail.google.com/mail/#inbox?compose=new" title="GMAIL Contact" target="_blank"><i class="icon-user"></i> ' . $rowtwo['firstname'] . ' ' . $rowtwo['surname'] .'</a> <br /> 
@@ -91,10 +92,17 @@ do
                           $tasksAddition = mysqli_query($con,"SELECT id, project_name FROM tasks");
                           while($row = mysqli_fetch_array($tasksAddition))
                             {
+                              $php_array[$row['id']] = $row['project_name'];
+                              $php_array2 = array('abc','def','ghi');
+                              $js_array = json_encode($php_array);
+
                             echo '<option taskid="'.$row['id'].'">' . $row['project_name'] .'</option>';
                             }
                         ?>
                       </select>
+                      
+                      <input type="text" data-provide="" placeholder="Search for skill type...">
+                      <input type="text" class="projects-typehead" data-provide="typeahead" placeholder="Search for your project...">
                       <div class="btn newtask" <?php echo 'date="'.$testdate.'"' ?>>Submit</div>
                     </fieldset>
                   </form>
@@ -115,7 +123,19 @@ echo '</table>';
 
 <script>
 $(document).ready(function() {
-                           
+        $("span").tooltip();
+        var subjects = ['PHP', 'MySQL', 'SQL', 'PostgreSQL', 'HTML', 'CSS', 'HTML5', 'CSS3', 'JSON'];
+        
+        /*
+        var jsonString =  '[{"label":"Sistemski Administrator","value":"1"},{"label":"Jure Hotujec","value":"3"},{"label":" ","value":"4"},{"label":"Simona Jamnik","value":"5"},{"label":"Ma\u0161a Mu\u0161i\u010d","value":"6"},{"label":" ","value":"7"}]';
+        var jsonObj = $.parseJSON(jsonString);
+        var sourceArr = [];
+
+        for (var i=0; i<jsonObj.length; i++) {
+          sourceArr.push(jsonObj[i].label);
+        }
+        */
+        $('.projects-typehead').typeahead({source: subjects});
 
 })
 </script>

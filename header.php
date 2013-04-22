@@ -19,7 +19,7 @@
     <div id="loading">Loading, Please wait...</div>
 <div id="mainnav" class="navbar">
   <div class="navbar-inner">
-    <a class="brand" href="#">THE MATRIX</a>
+    <a class="brand" href="#"><img src="img/matrix-beta.png" /></a>
     <ul class="nav">
       <li class="active"><a href="index.php">Home</a></li>
       <li><a href="projects.php">Users</a></li>
