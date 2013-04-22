@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 19, 2013 at 12:22 AM
+-- Generation Time: Apr 23, 2013 at 12:33 AM
 -- Server version: 5.0.45
 -- PHP Version: 5.2.5
 
@@ -12,6 +12,36 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Database: `cf_matrix`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `skill_type`
+--
+
+DROP TABLE IF EXISTS `skill_type`;
+CREATE TABLE IF NOT EXISTS `skill_type` (
+  `id` int(11) NOT NULL auto_increment,
+  `skill` varchar(50) NOT NULL,
+  `color` varchar(50) NOT NULL,
+  `skill_full` varchar(50) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `skill_type`
+--
+
+INSERT INTO `skill_type` (`id`, `skill`, `color`, `skill_full`) VALUES
+(1, 'PM', '#E01B6A', 'Project Manager'),
+(2, 'TPM', '#9DD6ED', 'Technical Project Manager'),
+(3, 'IA', '#5542D4', 'Information Architecture'),
+(4, 'DES', '#42D49E', ''),
+(5, 'DEV', '#CFD442', 'General Developer'),
+(6, 'PHP', '#D49742', 'PHP Coding'),
+(7, 'SHP', '', 'Microsoft Sharepoint 2007/2010'),
+(8, 'CON', '', ''),
+(9, 'TES', '', '');
 
 -- --------------------------------------------------------
 
@@ -45,7 +75,8 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `client_main_contact` varchar(50) default NULL,
   `contact_details` varchar(50) default NULL,
   `notes` varchar(50) default NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `fk_tasks_users_idx` (`contact`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=429 ;
 
 --
@@ -53,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `contact`, `hrs_spent`, `redmine_url`, `n_url`, `job_nr`, `status`, `client_name`, `project_name`, `type`, `hours`, `gbp_total_amount`, `payment_terms`, `start_date`, `estimated_end_date`, `sold_by`, `month_of_sale`, `project_manager`, `attached_project`, `po`, `third_party_costs`, `client_main_contact`, `contact_details`, `notes`) VALUES
-(1, 0, '', '', '', 'CF00362', 'Pending', 'Lewisham College', 'StaffNet Maintenance', 'IS', '12', '1440', 'Monthly in arrears', '15/04/2013', '15/09/2013', 'JT', 'April 2013', NULL, NULL, 'Awaiting PO', NULL, 'Daveena Dowlul', 'davee.dowlul@lewisham.ac.uk', NULL),
+(1, 1, '', '', '', 'CF00362', 'Pending', 'Lewisham College', 'StaffNet Maintenance', 'IS', '12', '1440', 'Monthly in arrears', '15/04/2013', '15/09/2013', 'JT', 'April 2013', NULL, NULL, 'Awaiting PO', NULL, 'Daveena Dowlul', 'davee.dowlul@lewisham.ac.uk', NULL),
 (2, 0, '', '', '', 'CF00361', 'Pending', 'Nuffield', 'Hospitals Microsites (manual vs automated)', 'WP', 'TBC', 'TBC', 'TBC', '08/04/2013', '31/05/2013', 'CH', 'April 2013', NULL, NULL, 'Awaiting PO', NULL, 'Solomon Degia', 'Solomon.degia@nuffieldhealth.com', NULL),
 (3, 0, '', '', '', 'CF00360', 'Current', 'Nuffield', 'iConnect development work', 'WP', '38', '3496', '100% upfront', '04/04/2013', '10/04/2013', 'AWG', 'April 2013', NULL, NULL, 'Awaiting PO', NULL, 'Jason Marsh', 'jason.marsh@nuffieldhealth.com', NULL),
 (4, 0, '', '', '', 'CF00359', 'Current', 'Nuffield', 'Hospitals Pricing Pages', 'WP', '131.75', '12121', '50% upfront, 50% on completion', '04/04/2013', '22/04/2013', 'CH', 'April 2013', NULL, NULL, '205000667', NULL, 'James Heal', 'james.heal@nuffieldhealth.com', NULL),
@@ -538,62 +569,20 @@ CREATE TABLE IF NOT EXISTS `task_repetition` (
   `date` date NOT NULL,
   `user_id` int(11) NOT NULL,
   `duration` varchar(10) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=60 ;
+  `skill_type_id` int(11) NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_task_repetition_tasks1_idx` (`task_id`),
+  KEY `fk_task_repetition_users1_idx` (`user_id`),
+  KEY `skill_type_id` (`skill_type_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `task_repetition`
 --
 
-INSERT INTO `task_repetition` (`id`, `task_id`, `date`, `user_id`, `duration`) VALUES
-(12, 1, '2013-04-17', 1, '2.50'),
-(13, 1, '2013-04-17', 2, '2.50'),
-(14, 1, '2013-04-17', 1, ''),
-(15, 1, '2013-04-17', 1, ''),
-(16, 1, '2013-04-17', 1, '50'),
-(17, 1, '2013-04-17', 1, ''),
-(18, 1, '2013-04-17', 1, '50'),
-(19, 10, '2013-04-17', 1, '2.60'),
-(20, 1, '2013-04-17', 2, '2.60'),
-(21, 1, '2013-04-16', 2, '5'),
-(22, 1, '2013-04-16', 2, '5'),
-(23, 1, '2013-04-15', 1, ''),
-(24, 1, '2013-04-15', 1, '2.50'),
-(25, 3, '2013-04-15', 1, '2.50'),
-(26, 1, '2013-04-15', 2, '6'),
-(27, 1, '2013-04-15', 2, '2.50'),
-(28, 1, '2013-04-15', 2, '2.50'),
-(29, 1, '2013-04-15', 3, '6.0'),
-(30, 3, '2013-04-15', 4, '2.50'),
-(31, 3, '2013-04-15', 4, '2.50'),
-(32, 17, '2013-04-15', 4, '2.5'),
-(33, 14, '2013-04-15', 4, '2.5'),
-(34, 1, '2013-04-15', 3, '2.50'),
-(35, 1, '2013-04-15', 3, '5.553'),
-(36, 16, '2013-04-15', 3, '3.33'),
-(37, 16, '2013-04-15', 2, '2.5'),
-(38, 1, '2013-04-15', 1, '1'),
-(39, 16, '2013-04-15', 1, '2'),
-(40, 15, '2013-04-15', 2, '2.5'),
-(41, 13, '2013-04-15', 1, '3'),
-(42, 13, '2013-04-15', 1, '3'),
-(43, 1, '2013-04-15', 2, '2.5'),
-(44, 1, '2013-04-15', 2, '2.555555'),
-(45, 13, '2013-04-15', 2, '3.33333'),
-(46, 15, '2013-04-15', 3, '3333333333'),
-(47, 1, '2013-04-16', 3, '3.55'),
-(48, 5, '2013-04-16', 3, 'ji,'),
-(49, 17, '2013-04-16', 3, 'ji,'),
-(50, 17, '2013-04-16', 3, 'ji,'),
-(51, 1, '2013-04-15', 4, '3.50'),
-(52, 6, '2013-04-15', 3, 'GH'),
-(53, 1, '2013-04-15', 3, '3'),
-(54, 1, '2013-04-15', 5, '3.5'),
-(55, 1, '2013-04-15', 5, '3'),
-(56, 1, '2013-04-15', 4, '2.5'),
-(57, 1, '2013-04-15', 5, '2.5'),
-(58, 3, '2013-04-15', 5, '2'),
-(59, 1, '2013-04-15', 5, '2');
+INSERT INTO `task_repetition` (`id`, `task_id`, `date`, `user_id`, `duration`, `skill_type_id`) VALUES
+(1, 1, '2013-04-22', 1, '2.50', 2),
+(2, 5, '2013-04-22', 1, '2.5', 1);
 
 -- --------------------------------------------------------
 
@@ -608,6 +597,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `surname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
@@ -624,3 +614,20 @@ INSERT INTO `users` (`id`, `firstname`, `surname`, `email`, `password`) VALUES
 (6, 'John', 'Scott', '', ''),
 (7, 'Mike', 'Gough', '', ''),
 (8, 'Daniel', 'Dukharan', '', '');
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tasks`
+--
+ALTER TABLE `tasks`
+  ADD CONSTRAINT `fk_tasks_users` FOREIGN KEY (`contact`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `task_repetition`
+--
+ALTER TABLE `task_repetition`
+  ADD CONSTRAINT `fk_task_repetition_tasks1` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_task_repetition_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;

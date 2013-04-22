@@ -99,7 +99,10 @@ include('header.php');
                             hours = $(parent).find('.allocated-hours').val();
 
                             task = $(parent).find('.selected-task');
-                            taskid = $("option:selected", task).attr("taskid");  
+                            taskid = $("option:selected", task).attr("taskid");
+
+                            skill = $(parent).find('.selected-skill-type');
+                            skillid = $("option:selected", skill).attr("skillid");  
 
                             date = $(this).attr('date');
 
@@ -107,7 +110,7 @@ include('header.php');
                             //Ajax function
                             $.ajax({ url: 'new_task_script.php',
                                 type: 'post',
-                                data: {hours: hours, taskid: taskid, userid: userid, date: date},
+                                data: {hours: hours, taskid: taskid, userid: userid, date: date, skillid: skillid},
                                  beforeSend: function ( xhr ) {
                                 xhr.overrideMimeType("text/plain; charset=x-user-defined");
                                 },

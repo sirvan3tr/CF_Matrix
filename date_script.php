@@ -100,6 +100,16 @@ do
                             }
                         ?>
                       </select>
+
+                      <select class="selected-skill-type">
+                        <?php
+                          $tasksAdditionSKILL = mysqli_query($con,"SELECT id, skill, skill_full FROM skill_type");
+                          while($row = mysqli_fetch_array($tasksAdditionSKILL))
+                            {
+                            echo '<option skillid="'.$row['id'].'">['.$row['skill'].'] '.$row['skill_full'].'</option>';
+                            }
+                        ?>
+                      </select>
                       
                       <input type="text" data-provide="" placeholder="Search for skill type...">
                       <input type="text" class="projects-typehead" data-provide="typeahead" placeholder="Search for your project...">
