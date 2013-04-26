@@ -1,14 +1,59 @@
 <?php
 include('header.php');
+include('config.php');
 ?>
     <div class="container-fluid">
       <div class="row-fluid">
        
         <div class="span12">
           <!--Body content-->
+          <!-- Button to trigger modal -->
+<a href="#taskAdditionModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+ 
+<!-- Modal -->
+<div id="taskAdditionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Modal header</h3>
+  </div>
+  <div class="modal-body">
+  <form id="newtaskform">
+   
+    <input class="allocated-hours" type="text" placeholder="0.00"> <br />
+    <select class="selected-task">
+      <?php
+        $tasksAddition = mysqli_query($con,"SELECT id, project_name FROM tasks");
+        while($row = mysqli_fetch_array($tasksAddition))
+          {
+            $php_array[$row['id']] = $row['project_name'];
+            $php_array2 = array('abc','def','ghi');
+            $js_array = json_encode($php_array);
+
+          echo '<option taskid="'.$row['id'].'">' . $row['project_name'] .'</option>';
+          }
+      ?>
+    </select>
+    <br />
+    <select class="selected-skill-type">
+      <?php
+        $tasksAdditionSKILL = mysqli_query($con,"SELECT id, skill, skill_full FROM skill_type");
+        while($row = mysqli_fetch_array($tasksAdditionSKILL))
+          {
+          echo '<option skillid="'.$row['id'].'">['.$row['skill'].'] '.$row['skill_full'].'</option>';
+          }
+      ?>
+    </select><br />
+    
+  </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary newtask">Save changes</button>
+  </div>
+</div>
+
           <form class="form-inline">
             <?php
-            include('config.php');
             $result = mysqli_query($con,"SELECT * FROM users");
              
 
@@ -63,7 +108,6 @@ include('header.php');
           // Animation complete.
           });
         }); // End of task details click
-
       }, // Success function
     }).done(function(data){
 	                      $(document).on('click', ".removetask", function () {
@@ -91,30 +135,26 @@ include('header.php');
                         $(document).on('click', ".task-addition", function () {
                           $(this).next().show();
                           userid = $(this).attr('userid');
+                          date = $(this).attr('date');
 
+                          $('#taskAdditionModal').modal('show')
 
-                          $('.newtask').click(function () {
-                            parent = $(this).parent();
+                          $(document).on('click', ".newtask", function () {
+                            var hours = $("#newtaskform").find('.allocated-hours').val();
 
-                            hours = $(parent).find('.allocated-hours').val();
+                            var task = $("#newtaskform").find('.selected-task');
+                            var taskid = $("option:selected", task).attr("taskid");
 
-                            task = $(parent).find('.selected-task');
-                            taskid = $("option:selected", task).attr("taskid");
-
-                            skill = $(parent).find('.selected-skill-type');
-                            skillid = $("option:selected", skill).attr("skillid");  
-
-                            date = $(this).attr('date');
+                            var skill = $("#newtaskform").find('.selected-skill-type');
+                            var skillid = $("option:selected", skill).attr("skillid");  
 
 
                             //Ajax function
                             $.ajax({ url: 'new_task_script.php',
                                 type: 'post',
                                 data: {hours: hours, taskid: taskid, userid: userid, date: date, skillid: skillid},
-                                 beforeSend: function ( xhr ) {
-                                xhr.overrideMimeType("text/plain; charset=x-user-defined");
-                                },
                                 success: function(data) {
+                                    $('#taskAdditionModal').modal('hide')
                                     $("#id" + date + userid).html("Loading").load("td_refresh.php", {date: date, userid: userid });
                                 },
                                 error: function (data) {
