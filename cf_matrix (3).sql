@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 22, 2013 at 05:30 PM
+-- Generation Time: Apr 26, 2013 at 05:38 PM
 -- Server version: 5.5.24
 -- PHP Version: 5.3.10-1ubuntu3.4
 
@@ -82,7 +82,8 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `client_main_contact` varchar(50) DEFAULT NULL,
   `contact_details` varchar(50) DEFAULT NULL,
   `notes` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `fk_tasks_users_idx` (`contact`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=429 ;
 
 --
@@ -90,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `contact`, `hrs_spent`, `redmine_url`, `n_url`, `job_nr`, `status`, `client_name`, `project_name`, `type`, `hours`, `gbp_total_amount`, `payment_terms`, `start_date`, `estimated_end_date`, `sold_by`, `month_of_sale`, `project_manager`, `attached_project`, `po`, `third_party_costs`, `client_main_contact`, `contact_details`, `notes`) VALUES
-(1, 0, '', '', '', 'CF00362', 'Pending', 'Lewisham College', 'StaffNet Maintenance', 'IS', '12', '1440', 'Monthly in arrears', '15/04/2013', '15/09/2013', 'JT', 'April 2013', NULL, NULL, 'Awaiting PO', NULL, 'Daveena Dowlul', 'davee.dowlul@lewisham.ac.uk', NULL),
+(1, 1, '', '', '', 'CF00362', 'Pending', 'Lewisham College', 'StaffNet Maintenance', 'IS', '12', '1440', 'Monthly in arrears', '15/04/2013', '15/09/2013', 'JT', 'April 2013', NULL, NULL, 'Awaiting PO', NULL, 'Daveena Dowlul', 'davee.dowlul@lewisham.ac.uk', NULL),
 (2, 0, '', '', '', 'CF00361', 'Pending', 'Nuffield', 'Hospitals Microsites (manual vs automated)', 'WP', 'TBC', 'TBC', 'TBC', '08/04/2013', '31/05/2013', 'CH', 'April 2013', NULL, NULL, 'Awaiting PO', NULL, 'Solomon Degia', 'Solomon.degia@nuffieldhealth.com', NULL),
 (3, 0, '', '', '', 'CF00360', 'Current', 'Nuffield', 'iConnect development work', 'WP', '38', '3496', '100% upfront', '04/04/2013', '10/04/2013', 'AWG', 'April 2013', NULL, NULL, 'Awaiting PO', NULL, 'Jason Marsh', 'jason.marsh@nuffieldhealth.com', NULL),
 (4, 0, '', '', '', 'CF00359', 'Current', 'Nuffield', 'Hospitals Pricing Pages', 'WP', '131.75', '12121', '50% upfront, 50% on completion', '04/04/2013', '22/04/2013', 'CH', 'April 2013', NULL, NULL, '205000667', NULL, 'James Heal', 'james.heal@nuffieldhealth.com', NULL),
@@ -576,20 +577,99 @@ CREATE TABLE IF NOT EXISTS `task_repetition` (
   `user_id` int(11) NOT NULL,
   `duration` varchar(10) NOT NULL,
   `skill_type_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=92 ;
+  PRIMARY KEY (`id`),
+  KEY `fk_task_repetition_tasks1_idx` (`task_id`),
+  KEY `fk_task_repetition_users1_idx` (`user_id`),
+  KEY `skill_type_id` (`skill_type_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=85 ;
 
 --
 -- Dumping data for table `task_repetition`
 --
 
 INSERT INTO `task_repetition` (`id`, `task_id`, `date`, `user_id`, `duration`, `skill_type_id`) VALUES
-(79, 1, '2013-04-22', 1, '20', 4),
-(82, 16, '2013-04-22', 3, '8', 2),
-(85, 19, '2013-04-22', 4, '5.0', 9),
-(89, 17, '2013-04-23', 2, '3', 0),
-(90, 1, '2013-04-23', 2, '5', 0),
-(91, 18, '2013-04-23', 1, '6.5', 6);
+(1, 1, '2013-04-22', 1, '2.50', 2),
+(2, 5, '2013-04-22', 1, '2.5', 1),
+(4, 1, '2013-04-22', 1, '2.5', 1),
+(6, 1, '2013-05-09', 2, '7', 1),
+(7, 1, '2013-04-22', 2, '6', 6),
+(8, 14, '2013-04-22', 2, '5', 0),
+(9, 108, '2013-04-22', 3, '5', 5),
+(10, 16, '2013-04-22', 3, '8', 1),
+(11, 1, '2013-04-22', 4, '2.5', 8),
+(12, 1, '2013-04-22', 4, '2.5', 8),
+(13, 4, '2013-04-22', 5, '5.5', 1),
+(14, 4, '2013-04-22', 5, '5.5', 1),
+(15, 4, '2013-04-22', 5, '5.5', 1),
+(16, 1, '2013-04-22', 6, '1', 3),
+(17, 1, '2013-04-22', 6, '1', 3),
+(18, 1, '2013-04-22', 6, '1', 3),
+(19, 1, '2013-04-22', 6, '1', 3),
+(20, 1, '2013-04-23', 1, '1', 1),
+(21, 1, '2013-04-23', 2, '2', 3),
+(22, 1, '2013-04-23', 2, '2', 3),
+(23, 1, '2013-04-24', 1, '3', 5),
+(24, 1, '2013-04-24', 2, '3', 3),
+(25, 1, '2013-04-24', 2, '3', 3),
+(26, 1, '2013-04-24', 3, '2', 1),
+(27, 1, '2013-04-24', 3, '2', 1),
+(28, 1, '2013-04-24', 3, '2', 1),
+(29, 18, '2013-04-24', 2, '3', 0),
+(30, 18, '2013-04-24', 2, '3', 0),
+(31, 1, '2013-04-24', 4, '3', 5),
+(32, 1, '2013-04-24', 4, '3', 5),
+(33, 1, '2013-04-24', 4, '3', 5),
+(34, 1, '2013-04-24', 4, '3', 5),
+(35, 1, '2013-04-24', 4, '3', 5),
+(36, 1, '2013-04-25', 1, '6', 1),
+(37, 1, '2013-04-25', 2, '3', 1),
+(38, 1, '2013-04-25', 2, '3', 1),
+(39, 1, '2013-04-25', 3, '4', 2),
+(40, 1, '2013-04-25', 4, '5', 4),
+(41, 1, '2013-04-25', 4, '5', 4),
+(42, 1, '2013-04-25', 5, '5', 3),
+(43, 1, '2013-04-25', 5, '5', 3),
+(44, 1, '2013-04-25', 5, '5', 3),
+(45, 1, '2013-04-25', 4, '1', 0),
+(46, 1, '2013-04-25', 4, '1', 0),
+(47, 20, '2013-04-25', 4, '', 0),
+(48, 1, '2013-04-23', 4, '2', 1),
+(49, 1, '2013-04-23', 5, '2', 1),
+(50, 1, '2013-04-23', 5, '2', 1),
+(51, 1, '0000-00-00', 1, 'e', 1),
+(52, 1, '0000-00-00', 1, 'e', 1),
+(53, 1, '0000-00-00', 1, 'e', 1),
+(54, 1, '0000-00-00', 1, 'e', 1),
+(55, 1, '0000-00-00', 1, 'eee', 1),
+(56, 1, '2013-04-19', 1, '3', 1),
+(57, 1, '2013-04-19', 1, '3', 1),
+(58, 1, '2013-04-19', 1, '3', 1),
+(59, 1, '2013-04-19', 2, '3', 1),
+(60, 1, '2013-04-19', 2, '3', 1),
+(61, 1, '2013-04-19', 2, '3', 1),
+(62, 1, '2013-04-19', 2, '3', 1),
+(63, 1, '2013-04-19', 1, '3', 1),
+(64, 1, '2013-04-19', 1, '3', 1),
+(65, 1, '2013-04-19', 1, '3', 1),
+(66, 1, '2013-04-19', 1, '3', 1),
+(67, 1, '2013-04-19', 1, '3', 1),
+(68, 1, '2013-04-19', 1, '3', 1),
+(69, 1, '2013-04-19', 1, '3', 3),
+(70, 1, '2013-04-19', 1, '3', 3),
+(71, 1, '2013-04-19', 1, '3', 3),
+(72, 1, '2013-04-19', 1, '3', 4),
+(73, 1, '2013-04-19', 1, '3', 4),
+(74, 1, '2013-04-19', 1, '3', 4),
+(75, 1, '2013-04-19', 1, '3', 4),
+(76, 1, '2013-04-19', 3, 'w', 1),
+(77, 3, '2013-04-19', 3, '34', 3),
+(78, 3, '2013-04-19', 3, '34', 3),
+(79, 7, '2013-04-19', 4, '56', 8),
+(80, 7, '2013-04-26', 1, '56', 5),
+(81, 7, '2013-04-26', 1, '56', 5),
+(82, 7, '2013-04-19', 3, '56', 5),
+(83, 7, '2013-04-19', 3, '56', 5),
+(84, 7, '2013-04-19', 3, '56', 5);
 
 -- --------------------------------------------------------
 
@@ -604,6 +684,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `surname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `hrs_per_day` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
@@ -611,15 +693,15 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `firstname`, `surname`, `email`, `password`) VALUES
-(1, 'Sirvan', 'Almasi', 'salmasi@contentformula.com', ''),
-(2, 'Daniel', 'Keegan', 'dkeegan@contentformula.com', ''),
-(3, 'James', 'Taylor', 'jtaylor@contentformula.com', ''),
-(4, 'James', 'Toseland', 'jtoseland@contentformula.com', ''),
-(5, 'Elisa', 'Azogui', '', ''),
-(6, 'John', 'Scott', '', ''),
-(7, 'Mike', 'Gough', '', ''),
-(8, 'Daniel', 'Dukharan', '', '');
+INSERT INTO `users` (`id`, `firstname`, `surname`, `email`, `password`, `hrs_per_day`) VALUES
+(1, 'Sirvan', 'Almasi', 'salmasi@contentformula.com', '', ''),
+(2, 'Daniel', 'Keegan', 'dkeegan@contentformula.com', '', ''),
+(3, 'James', 'Taylor', 'jtaylor@contentformula.com', '', ''),
+(4, 'James', 'Toseland', 'jtoseland@contentformula.com', '', ''),
+(5, 'Elisa', 'Azogui', '', '', ''),
+(6, 'John', 'Scott', '', '', ''),
+(7, 'Mike', 'Gough', '', '', ''),
+(8, 'Daniel', 'Dukharan', '', '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
