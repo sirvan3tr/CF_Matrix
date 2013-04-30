@@ -27,6 +27,7 @@
       <li><a href="project.php">Project</a></li>
       <li><a href="#">About The Matrix</a></li>
       <li><a href="#"><i class="icon-filter"></i> Filter Users</a></li>
+      <li><a href="skill_hours_report.php">Report</a></li>
     </ul>
   </div>
 </div>

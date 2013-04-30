@@ -132,38 +132,37 @@ include('config.php');
                             }); // Ajax Function
                           }) //removetask click fn
 						  
-                        $(document).on('click', ".task-addition", function () {
-                          $(this).next().show();
-                          userid = $(this).attr('userid');
-                          date = $(this).attr('date');
+                        $(document).on("click", ".task-addition", function () {
+                          $('#taskAdditionModal').modal('show');
+                          var userid = $(this).attr('userid');
+                          var date = $(this).attr('date');
 
-                          $('#taskAdditionModal').modal('show')
 
-                          $(document).on('click', ".newtask", function () {
+
+                          $(".newtask").unbind('click').click(function() {
+
                             var hours = $("#newtaskform").find('.allocated-hours').val();
 
                             var task = $("#newtaskform").find('.selected-task');
                             var taskid = $("option:selected", task).attr("taskid");
 
                             var skill = $("#newtaskform").find('.selected-skill-type');
-                            var skillid = $("option:selected", skill).attr("skillid");  
-
+                            var skillid = $("option:selected", skill).attr("skillid"); 
 
                             //Ajax function
-                            $.ajax({ url: 'new_task_script.php',
+                            var request = $.ajax({ url: 'new_task_script.php',
                                 type: 'post',
                                 data: {hours: hours, taskid: taskid, userid: userid, date: date, skillid: skillid},
-                                success: function(data) {
+                                success: function(e) {
+
                                     $('#taskAdditionModal').modal('hide')
                                     $("#id" + date + userid).html("Loading").load("td_refresh.php", {date: date, userid: userid });
                                 },
-                                error: function (data) {
+                                error: function (e) {
                                     alert("There was an error. Image could not be added, please try again");
                                 } // Success function
                             }); // Ajax Function
                           }) // Click fn
-
-
 
                         }) // Click fn
     });

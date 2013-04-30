@@ -14,4 +14,6 @@ if($query) {
 }else {
 	echo "Failed task addition";
 }
+
+mysqli_close($con);
 ?>

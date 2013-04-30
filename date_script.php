@@ -99,5 +99,6 @@ echo '</table>';
 $(document).ready(function() {
         $("span").tooltip();
 
+
 })
 </script>

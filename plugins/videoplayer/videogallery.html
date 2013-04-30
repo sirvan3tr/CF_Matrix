@@ -1,0 +1,58 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>VIDEO GALLERY WITH IMAGE SLIDESHOW - 10 MORE STYLE</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+<div align="center" style="height:40px">
+	<font face="Tahoma, Arial, sans-serif" size="+1" color="#666666"><b>Preview 5</b></font> </br>
+</div>
+<div align="center">
+	<div id="flashcontent">
+   	<script type="text/javascript" src="swfobject.js"></script>
+		<script type="text/javascript">
+		$(function() {
+
+
+			var so = new SWFObject("videogallery.swf", "mymovie", "640", "396", "9","#222222");
+			so.addParam("menu", "false");
+			so.addParam("allowfullscreen", "true");
+			so.addParam("allowScriptAccess", "always");
+			so.addVariable("dataPath", "videogallery_asset/data.xml");
+			so.setAttribute("wmode", "opaque");
+
+			so.write("flashcontent");
+
+			})
+		</script>
+	</div>
+</div>
+<div id="testdiv" style="display:block; width:400px; height:200px; background:red;position: relative;top: -116px;right: -319px;"></div>
+
+<script>
+
+$(document).ready(function() {
+        $("#testdiv").click(function() { 
+                	alert("click");
+            ga('send', 'event', 'CategoryVideoPlayer', 'ActionPlayVIdeo', 'Labelnav-buttons');
+
+
+        });
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40478842-1', {
+  'cookieDomain': 'none'
+});
+  ga('send', 'pageview');
+
+})
+</script>
+</body>
+</html>

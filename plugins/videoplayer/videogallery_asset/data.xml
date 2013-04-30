@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<main 
+	
+	autoPlaySlideshow="yes"
+	autoPlaySlideshowDelayTime="3"
+	autoPlayNextVideo="no"
+	autoStartVideo="no"
+	
+	thumbnailAutoHide="yes"
+	playerAutoHide="no"
+	slideshowStartAfterVideoEnd="yes"
+	
+	videoWidth="640"
+	videoHeight="360"
+	videoBgColor="000000"
+	videoBufferTime="1"
+	videoVolumeStart="50"
+	videoSmoothness="yes"
+	videoDefaultQuality="medium"
+	videoTextEmbedFont="yes"
+	videoTextBgColor="5f5f5f"
+	videoTextBgTransparency="90"
+	videoTitleLeftAlign="yes"
+	videoTitleVerticalSpace="125"
+		
+	thumbnailWidth="256"
+	thumbnailHeight="175"
+	thumbnailAlign="B"
+	thumbnailImageWidth="128"
+	thumbnailImageHeight="72"
+	thumbnailImageBorderSize="5"
+	thumbnailImageBorderColor="1c1c1c"
+	thumbnailImageAlignLeft="no"
+	thumbnailHorizontalMargin="10"
+	thumbnailVerticalMargin="14"
+	thumbnailAllVerticalHorizontalSpacing=""
+	thumbnailBgColor="4a4a4a"
+	thumbnailBgTransparency="50"
+	thumbnailRollOverColor="3a3a3a"	
+	thumbnailHighlightColor="2b2b2b"
+	thumbnailHighlightTransparency="50"
+	thumbnailSeparatorColor=""
+	thumbnailHeadingTextEmbed="yes"
+	thumbnailDescriptionTextEmbed="yes"	
+	
+	largeImageTransition="4"
+	largeImageBrightnessEffect="no"
+	
+	scrollBar="yes"
+	scrollBarColor="ffffff"
+	scrollBarBgColor="4a4a4a"
+		
+	playerWidth="0"
+	playerHeight="35"
+	playerNavigations="ply,sek,vol,ful"
+	playerFixedSizeOnFullScreenMode="no"
+	playerSkinGlassType="no"
+	playerButtonWidth="40"
+	playerIconSize="70"
+	playerBorderSize="0"
+	playerCornerRadius="0"
+	playerHorizontalMargin="0"
+	playerVerticalMargin="1"
+	playerTimerAlignBottom="no"
+	playerSeekBarHeight="2"
+	playerBgColor="e0e0e0"
+	playerBgTransparency="100"
+	playerIconColor="464646"
+	playerOverlayColor="e0e0e0"
+	playerOverlayTransparency="100"
+	playerBorderColor="ffffff"
+	playerBorderTransparency="100"
+	playerButtonRollOverColor="ffffff"
+	playerSeparatorColor="999999"
+	playerSeekBarColor="FF9933"
+	playerShadowTransparency="100"
+	
+	logoPath=""
+	logoXmargin="-5"
+	logoYmargin="-5"
+	
+>
+
+	
+<items >	
+
+	<item
+		thumbnail="videogallery_asset/thumb1.flv"
+		largeImage="videogallery_asset/image1.jpg"
+		videoYoutube="no" 
+		videoLD="videogallery_asset/video1.flv" 
+		videoHD="videogallery_asset/video_hd.f4v" 
+		url="" target="">
+		
+		<videoDescription ><![CDATA[<font color="#ffffff">Load any dimension video. Play local and YouTube videos. Complete Resizable</font>]]></videoDescription> 
+		
+		<heading ><![CDATA[<font color="#ffffff"><b>Easy to customize:</b></font>]]></heading>
+		<description ><![CDATA[<font color="#ffffff">Load any dimension video. Play local and YouTube videos.</font>]]></description> 
+	</item>
+	
+	<item 
+		thumbnail="videogallery_asset/swf_file.swf" 
+		largeImage="videogallery_asset/image2.jpg"  
+		videoYoutube="yes"
+		videoLD="uXLbQrK6cXw" 
+		videoHD="" 
+		url="" target="">	
+		
+		<videoDescription ><![CDATA[<font color="#ffffff">Option to play both local and YouTube videos</font>]]></videoDescription> 
+		
+		<heading ><![CDATA[<font color="#ffffff"><b>YouTube Video:</b> </font>]]></heading>
+		<description ><![CDATA[<font color="#ffffff">Support both local and YouTube videos. Option to play local HD video</font>]]></description> 
+	</item>
+		
+	<item 
+		thumbnail="videogallery_asset/thumb3.jpg"
+		largeImage="videogallery_asset/image3.jpg"
+		videoYoutube="no"   
+		videoLD="videogallery_asset/video3.flv" 
+		videoHD="" 
+		url="" target="_target">
+		
+		<videoDescription ><![CDATA[<font color="#ffffff">Show Video description text</font>]]></videoDescription> 
+		
+		<heading ><![CDATA[<font color="#ffffff"><b>Thumbnails:</b> </font>]]></heading>
+		<description ><![CDATA[<font color="#ffffff">Align thumbnails to Left, Right, Top or Bottom</font>]]></description> 
+	</item>
+		
+	<item 
+		thumbnail="videogallery_asset/thumb4.jpg"
+		largeImage="videogallery_asset/image4.jpg"
+		videoYoutube="no" 	
+		videoLD="videogallery_asset/video4.flv" 
+		videoHD="videogallery_asset/video_hd.f4v"
+		url="" target="_target" >
+		
+		<videoDescription ><![CDATA[<font color="#ffffff">More than 17 xml setting is availiable for player customization</font>]]></videoDescription> 
+		
+		<heading><![CDATA[<font color="#ffffff"><b>Player Design:</b></font>]]></heading>
+		<description><![CDATA[<font color="#ffffff">Start your customization with More than 10 default setting</font>]]></description> 
+	</item>
+		
+	<item 
+		thumbnail="videogallery_asset/thumb5.jpg" 
+		largeImage="videogallery_asset/image5.jpg"
+		videoYoutube="no" 
+		videoLD="videogallery_asset/video5.flv" 
+		videoHD="videogallery_asset/video_hd.f4v" 
+		url="" target="" >
+		
+		<videoDescription ><![CDATA[<font color="#ffffff">Thumbnail image can be align left or center</font>]]></videoDescription> 
+
+		<heading ><![CDATA[<font color="#ffffff"><b>Remove Thumbnail image:</b></font>]]></heading>
+		<description ><![CDATA[<font color="#ffffff">Option to Add/remove thumbnail image</font>]]></description> 
+	</item>
+				
+	
+	<item 
+		thumbnail="videogallery_asset/thumb6.flv"
+		largeImage="videogallery_asset/image6.jpg"
+		videoYoutube="no"  
+		videoLD="videogallery_asset/video6.flv" 
+		videoHD="videogallery_asset/video_hd.f4v"  
+		url="" target="" >
+		
+		<videoDescription ><![CDATA[<font color="#ffffff">Use scrollbar or mouse control to browse videos</font>]]></videoDescription> 
+
+		<heading><![CDATA[<font color="#ffffff"><b>Scrollbar / Mouse control:</b></font>]]></heading>
+		<description><![CDATA[<font color="#ffffff">Option to browse the thumbnails using scrollbar or mouse control </font>]]></description> 
+	</item>
+				
+	<item 
+		thumbnail="videogallery_asset/thumb7.jpg"
+		largeImage="videogallery_asset/image7.jpg"
+		videoYoutube="yes" 
+		videoLD="1Bk0C95iKRU" 
+		videoHD=""  
+		url="" target="" >
+		
+		<videoDescription ><![CDATA[]]></videoDescription> 
+
+		<heading><![CDATA[<font color="#ffffff"><b>Auto Hide:</b></font>]]></heading>
+		<description><![CDATA[<font color="#ffffff">Option for thumbnail and video player auto hide</font>]]></description> 
+	</item>
+			
+	<item 
+		thumbnail="videogallery_asset/thumb8.jpg" 
+		largeImage="videogallery_asset/image8.jpg"
+		videoYoutube="no"
+		videoLD="videogallery_asset/video8.flv" 
+		videoHD="videogallery_asset/video_hd.f4v"
+		url="" target="" >
+		
+		<videoDescription ><![CDATA[<font color="#ffffff">Option to set 5 types of image transition with or without brightness effect</font>]]></videoDescription> 
+		
+		<heading><![CDATA[<font color="#ffffff"><b>Image Transition:</b>]]></heading>
+		<description><![CDATA[<font color="#ffffff">4 types of image transition with Brightness / Darkness Effect]]></description> 
+	</item>
+	
+	<item 
+		thumbnail="videogallery_asset/thumb9.jpg" 
+		largeImage="videogallery_asset/image9.jpg"
+		videoYoutube="no"
+		videoLD="videogallery_asset/video9.flv" 
+		videoHD="videogallery_asset/video_hd.f4v"
+		url="" target="" >
+		
+		<videoDescription ><![CDATA[<font color="#ffffff">Option to show logo over the video and position using x and y margin</font>]]></videoDescription> 
+		
+		<heading><![CDATA[<font color="#ffffff"><b>Add Logo:</b></font>]]></heading>
+		<description><![CDATA[<font color="#ffffff">Add your logo over the video and position using x and y margin</font>]]></description> 
+	</item>
+	
+	<item 
+		thumbnail="" 
+		largeImage="videogallery_asset/image10.jpg"
+		videoYoutube="yes"
+		videoLD="AV1F_ukN2NY" 
+		videoHD=""
+		url="" target="" >
+		
+		<videoDescription ><![CDATA[<font color="#ffffff">All Text support Basic HTML format</font>]]></videoDescription> 
+		
+		<heading><![CDATA[]]></heading>
+		<description><![CDATA[<font color="#ffffff">You can change the text size, <font color="#FF9900">color</font>, <b>bold</b>. <font size="14" color="#ff0000">All Text support HTML format.</font> Option to Add/remove thumbnail image, heading and description text. If you choose thumbnail Right or Left Alignment than you can Show full heading and description text.</font>]]></description> 
+	</item>
+
+</items>
+
+</main>

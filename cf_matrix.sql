@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 23, 2013 at 12:33 AM
+-- Generation Time: Apr 30, 2013 at 09:51 PM
 -- Server version: 5.0.45
 -- PHP Version: 5.2.5
 
@@ -574,15 +574,12 @@ CREATE TABLE IF NOT EXISTS `task_repetition` (
   KEY `fk_task_repetition_tasks1_idx` (`task_id`),
   KEY `fk_task_repetition_users1_idx` (`user_id`),
   KEY `skill_type_id` (`skill_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `task_repetition`
 --
 
-INSERT INTO `task_repetition` (`id`, `task_id`, `date`, `user_id`, `duration`, `skill_type_id`) VALUES
-(1, 1, '2013-04-22', 1, '2.50', 2),
-(2, 5, '2013-04-22', 1, '2.5', 1);
 
 -- --------------------------------------------------------
 
