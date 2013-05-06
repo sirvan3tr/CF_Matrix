@@ -2,13 +2,13 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span12">
-      <table class="table table-striped">
+      <table id="skill-report" class="table table-striped">
         <thead>
      <?php
       include("config.php");
       echo '<th>';
   for ($i = 0; $i <= 11; $i++) {
-        echo '<td>'.date("F",strtotime($i."Months")).'</td>';
+        echo '<td class="content">'.date("F",strtotime($i."Months")).'</td>';
   }
       echo '</th>';
 
@@ -17,11 +17,11 @@
         while($row = mysqli_fetch_array($query))
         {
         echo "<tr>";
-        echo '<td><span class="matrixtaskname fl"><span data-toggle="tooltip" title="" data-original-title="' . $row['skill_full'] . '" class="matrixhours" style="background-color:'.$row['color'].';">'. $row['skill'] . '</span> '.$row['skill_full'].'</td>';
+        echo '<td ><span class="matrixtaskname fl"><span data-toggle="tooltip" title="" data-original-title="' . $row['skill_full'] . '" class="matrixhours" style="background-color:'.$row['color'].';">'. $row['skill'] . '</span> '.$row['skill_full'].'</td>';
         $skilltypeid = $row['id'];
 
 for ($i = 0; $i <= 11; $i++) {
-        echo "<td>";
+        echo '<td class="content">';
         $date = date("Y-m-d",strtotime($i."Months"));
         list($year, $month, $day) = explode('-', $date);
 
@@ -35,7 +35,7 @@ for ($i = 0; $i <= 11; $i++) {
         $totalhrs = $totalhrs + $rowhours['duration'];
         
       }
-      echo $totalhrs;
+      echo '<div data-toggle="tooltip" data-original-title="Click here to add bulk hours for this skill type">'.$totalhrs.'</div>';
       echo "</td>";
 
 }
@@ -59,7 +59,7 @@ include("calendar.php");
 
      $month = $dateComponents['mon'];            
      $year = $dateComponents['year'];
-$dateArray = array('S','M','T','W','T','F','S');
+      $dateArray = array('S','M','T','W','T','F','S');
       
      
      echo build_calendar($month,$year,$dateArray);
@@ -73,7 +73,8 @@ $dateArray = array('S','M','T','W','T','F','S');
 </table>
 <script>
 $(document).ready(function() {
-        $("span").tooltip();
+      $("span").tooltip();
+      $("div").tooltip();
 
 })
 </script>

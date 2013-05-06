@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 30, 2013 at 09:51 PM
+-- Generation Time: May 07, 2013 at 12:44 AM
 -- Server version: 5.0.45
 -- PHP Version: 5.2.5
 
@@ -12,6 +12,27 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Database: `cf_matrix`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `skill_hrs_bulk_addition`
+--
+
+DROP TABLE IF EXISTS `skill_hrs_bulk_addition`;
+CREATE TABLE IF NOT EXISTS `skill_hrs_bulk_addition` (
+  `id` int(11) NOT NULL,
+  `hrs` varchar(10) NOT NULL,
+  `skill_type_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `skill_type_id` (`skill_type_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `skill_hrs_bulk_addition`
+--
+
 
 -- --------------------------------------------------------
 
@@ -36,12 +57,12 @@ INSERT INTO `skill_type` (`id`, `skill`, `color`, `skill_full`) VALUES
 (1, 'PM', '#E01B6A', 'Project Manager'),
 (2, 'TPM', '#9DD6ED', 'Technical Project Manager'),
 (3, 'IA', '#5542D4', 'Information Architecture'),
-(4, 'DES', '#42D49E', ''),
+(4, 'DES', '#42D49E', 'Design'),
 (5, 'DEV', '#CFD442', 'General Developer'),
 (6, 'PHP', '#D49742', 'PHP Coding'),
 (7, 'SHP', '', 'Microsoft Sharepoint 2007/2010'),
-(8, 'CON', '', ''),
-(9, 'TES', '', '');
+(8, 'CON', '', 'Content'),
+(9, 'TES', '', 'Testing');
 
 -- --------------------------------------------------------
 
@@ -574,12 +595,15 @@ CREATE TABLE IF NOT EXISTS `task_repetition` (
   KEY `fk_task_repetition_tasks1_idx` (`task_id`),
   KEY `fk_task_repetition_users1_idx` (`user_id`),
   KEY `skill_type_id` (`skill_type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `task_repetition`
 --
 
+INSERT INTO `task_repetition` (`id`, `task_id`, `date`, `user_id`, `duration`, `skill_type_id`) VALUES
+(1, 3, '2013-05-03', 1, '2.5', 5),
+(2, 3, '2013-05-03', 2, '2.5', 3);
 
 -- --------------------------------------------------------
 
@@ -594,6 +618,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `surname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `working_hrs` varchar(10) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
@@ -602,15 +627,15 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `firstname`, `surname`, `email`, `password`) VALUES
-(1, 'Sirvan', 'Almasi', 'salmasi@contentformula.com', ''),
-(2, 'Daniel', 'Keegan', 'dkeegan@contentformula.com', ''),
-(3, 'James', 'Taylor', 'jtaylor@contentformula.com', ''),
-(4, 'James', 'Toseland', 'jtoseland@contentformula.com', ''),
-(5, 'Elisa', 'Azogui', '', ''),
-(6, 'John', 'Scott', '', ''),
-(7, 'Mike', 'Gough', '', ''),
-(8, 'Daniel', 'Dukharan', '', '');
+INSERT INTO `users` (`id`, `firstname`, `surname`, `email`, `password`, `working_hrs`) VALUES
+(1, 'Sirvan', 'Almasi', 'salmasi@contentformula.com', '', '7.5'),
+(2, 'Daniel', 'Keegan', 'dkeegan@contentformula.com', '', '7.5'),
+(3, 'James', 'Taylor', 'jtaylor@contentformula.com', '', '7.5'),
+(4, 'James', 'Toseland', 'jtoseland@contentformula.com', '', '12'),
+(5, 'Ben', 'Marshal', '', '', '7.5'),
+(6, 'John', 'Scott', '', '', '7.5'),
+(7, 'Mike', 'Gough', '', '', '7.5'),
+(8, 'Daniel', 'Dukharan', '', '', '7.5');
 
 --
 -- Constraints for dumped tables
@@ -626,5 +651,6 @@ ALTER TABLE `tasks`
 -- Constraints for table `task_repetition`
 --
 ALTER TABLE `task_repetition`
+  ADD CONSTRAINT `fk_task_repetition_skill_type1` FOREIGN KEY (`skill_type_id`) REFERENCES `skill_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_task_repetition_tasks1` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_task_repetition_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;

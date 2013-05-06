@@ -195,3 +195,13 @@ body {
 .matrixtaskname {
 	width: 170px;
 }
+
+#skill-report td.content {
+	text-align: center;
+}
+#skill-report td.content div {
+	cursor: pointer;
+}
+#skill-report td.content div:hover {
+	border: 1px dashed purple;
+}
