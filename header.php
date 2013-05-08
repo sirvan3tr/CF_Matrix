@@ -29,5 +29,6 @@
       <li><a href="#"><i class="icon-filter"></i> Filter Users</a></li>
       <li><a href="skill_hours_report.php">Report</a></li>
     </ul>
+    <a class="brand" href="#"><img src="img/pills.jpg" /></a>
   </div>
 </div>

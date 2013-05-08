@@ -1,17 +1,48 @@
 -- phpMyAdmin SQL Dump
--- version 2.11.2
+-- version 3.4.10.1deb1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 07, 2013 at 12:44 AM
--- Server version: 5.0.45
--- PHP Version: 5.2.5
+-- Generation Time: May 08, 2013 at 05:49 PM
+-- Server version: 5.5.24
+-- PHP Version: 5.3.10-1ubuntu3.6
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `cf_matrix`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `glogin_users`
+--
+
+DROP TABLE IF EXISTS `glogin_users`;
+CREATE TABLE IF NOT EXISTS `glogin_users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `photo` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `registered` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `glogin_users`
+--
+
+INSERT INTO `glogin_users` (`id`, `email`, `name`, `photo`, `registered`) VALUES
+(1, 'salmasi@contentformula.com', 'Sirvan Almasi', 'assets/img/default_avatar.jpg', '2013-05-08 11:13:56');
 
 -- --------------------------------------------------------
 
@@ -21,18 +52,22 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 DROP TABLE IF EXISTS `skill_hrs_bulk_addition`;
 CREATE TABLE IF NOT EXISTS `skill_hrs_bulk_addition` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `hrs` varchar(10) NOT NULL,
   `skill_type_id` int(11) NOT NULL,
   `date` date NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   KEY `skill_type_id` (`skill_type_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `skill_hrs_bulk_addition`
 --
 
+INSERT INTO `skill_hrs_bulk_addition` (`id`, `hrs`, `skill_type_id`, `date`) VALUES
+(1, '5', 5, '2013-05-01'),
+(2, '3.5', 3, '2013-06-01'),
+(3, '5', 3, '2013-05-01');
 
 -- --------------------------------------------------------
 
@@ -42,11 +77,11 @@ CREATE TABLE IF NOT EXISTS `skill_hrs_bulk_addition` (
 
 DROP TABLE IF EXISTS `skill_type`;
 CREATE TABLE IF NOT EXISTS `skill_type` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `skill` varchar(50) NOT NULL,
   `color` varchar(50) NOT NULL,
   `skill_full` varchar(50) NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
@@ -72,31 +107,31 @@ INSERT INTO `skill_type` (`id`, `skill`, `color`, `skill_full`) VALUES
 
 DROP TABLE IF EXISTS `tasks`;
 CREATE TABLE IF NOT EXISTS `tasks` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `contact` int(11) NOT NULL,
   `hrs_spent` varchar(50) NOT NULL,
   `redmine_url` varchar(255) NOT NULL,
   `n_url` varchar(255) NOT NULL,
-  `job_nr` varchar(50) default NULL,
-  `status` varchar(50) default NULL,
-  `client_name` varchar(50) default NULL,
-  `project_name` varchar(50) default NULL,
-  `type` varchar(50) default NULL,
-  `hours` varchar(50) default NULL,
-  `gbp_total_amount` varchar(50) default NULL,
-  `payment_terms` varchar(50) default NULL,
-  `start_date` varchar(50) default NULL,
-  `estimated_end_date` varchar(50) default NULL,
-  `sold_by` varchar(50) default NULL,
-  `month_of_sale` varchar(50) default NULL,
-  `project_manager` varchar(50) default NULL,
-  `attached_project` varchar(50) default NULL,
-  `po` varchar(50) default NULL,
-  `third_party_costs` varchar(50) default NULL,
-  `client_main_contact` varchar(50) default NULL,
-  `contact_details` varchar(50) default NULL,
-  `notes` varchar(50) default NULL,
-  PRIMARY KEY  (`id`),
+  `job_nr` varchar(50) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  `client_name` varchar(50) DEFAULT NULL,
+  `project_name` varchar(50) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `hours` varchar(50) DEFAULT NULL,
+  `gbp_total_amount` varchar(50) DEFAULT NULL,
+  `payment_terms` varchar(50) DEFAULT NULL,
+  `start_date` varchar(50) DEFAULT NULL,
+  `estimated_end_date` varchar(50) DEFAULT NULL,
+  `sold_by` varchar(50) DEFAULT NULL,
+  `month_of_sale` varchar(50) DEFAULT NULL,
+  `project_manager` varchar(50) DEFAULT NULL,
+  `attached_project` varchar(50) DEFAULT NULL,
+  `po` varchar(50) DEFAULT NULL,
+  `third_party_costs` varchar(50) DEFAULT NULL,
+  `client_main_contact` varchar(50) DEFAULT NULL,
+  `contact_details` varchar(50) DEFAULT NULL,
+  `notes` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
   KEY `fk_tasks_users_idx` (`contact`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=429 ;
 
@@ -544,7 +579,7 @@ INSERT INTO `tasks` (`id`, `contact`, `hrs_spent`, `redmine_url`, `n_url`, `job_
 
 DROP TABLE IF EXISTS `tasks_old`;
 CREATE TABLE IF NOT EXISTS `tasks_old` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `Contact` int(11) NOT NULL,
   `redmine_url` varchar(255) NOT NULL,
@@ -562,7 +597,7 @@ CREATE TABLE IF NOT EXISTS `tasks_old` (
   `gbp_total_amount` int(11) NOT NULL,
   `estimated_deadline` date NOT NULL,
   `created_on_date` date NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
@@ -585,17 +620,17 @@ INSERT INTO `tasks_old` (`id`, `name`, `Contact`, `redmine_url`, `n_url`, `statu
 
 DROP TABLE IF EXISTS `task_repetition`;
 CREATE TABLE IF NOT EXISTS `task_repetition` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `task_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `user_id` int(11) NOT NULL,
   `duration` varchar(10) NOT NULL,
   `skill_type_id` int(11) NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   KEY `fk_task_repetition_tasks1_idx` (`task_id`),
   KEY `fk_task_repetition_users1_idx` (`user_id`),
   KEY `skill_type_id` (`skill_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `task_repetition`
@@ -603,7 +638,8 @@ CREATE TABLE IF NOT EXISTS `task_repetition` (
 
 INSERT INTO `task_repetition` (`id`, `task_id`, `date`, `user_id`, `duration`, `skill_type_id`) VALUES
 (1, 3, '2013-05-03', 1, '2.5', 5),
-(2, 3, '2013-05-03', 2, '2.5', 3);
+(2, 3, '2013-05-03', 2, '2.5', 3),
+(3, 1, '2013-05-06', 1, '3', 2);
 
 -- --------------------------------------------------------
 
@@ -613,44 +649,34 @@ INSERT INTO `task_repetition` (`id`, `task_id`, `date`, `user_id`, `duration`, `
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `working_hrs` varchar(10) NOT NULL,
-  PRIMARY KEY  (`id`),
+  `photo` varchar(255) NOT NULL,
+  `registered` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `firstname`, `surname`, `email`, `password`, `working_hrs`) VALUES
-(1, 'Sirvan', 'Almasi', 'salmasi@contentformula.com', '', '7.5'),
-(2, 'Daniel', 'Keegan', 'dkeegan@contentformula.com', '', '7.5'),
-(3, 'James', 'Taylor', 'jtaylor@contentformula.com', '', '7.5'),
-(4, 'James', 'Toseland', 'jtoseland@contentformula.com', '', '12'),
-(5, 'Ben', 'Marshal', '', '', '7.5'),
-(6, 'John', 'Scott', '', '', '7.5'),
-(7, 'Mike', 'Gough', '', '', '7.5'),
-(8, 'Daniel', 'Dukharan', '', '', '7.5');
+INSERT INTO `users` (`id`, `name`, `firstname`, `surname`, `email`, `password`, `working_hrs`, `photo`, `registered`) VALUES
+(1, '', 'Sirvan', 'Almasi', 'salmasi@contentformula.com', '', '7.5', '', '0000-00-00 00:00:00'),
+(2, '', 'Daniel', 'Keegan', 'dkeegan@contentformula.com', '', '7.5', '', '0000-00-00 00:00:00'),
+(3, '', 'James', 'Taylor', 'jtaylor@contentformula.com', '', '7.5', '', '0000-00-00 00:00:00'),
+(4, '', 'James', 'Toseland', 'jtoseland@contentformula.com', '', '12', '', '0000-00-00 00:00:00'),
+(5, '', 'Ben', 'Marshal', '', '', '7.5', '', '0000-00-00 00:00:00'),
+(6, '', 'John', 'Scott', '', '', '7.5', '', '0000-00-00 00:00:00'),
+(7, '', 'Mike', 'Gough', '', '', '7.5', '', '0000-00-00 00:00:00'),
+(8, '', 'Daniel', 'Dukharan', '', '', '7.5', '', '0000-00-00 00:00:00'),
+(9, 'Sirvan Almasi', '', '', 'sirvan3tr@gmail.com', '', '', 'assets/img/default_avatar.jpg', '2013-05-08 11:44:30');
 
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `tasks`
---
-ALTER TABLE `tasks`
-  ADD CONSTRAINT `fk_tasks_users` FOREIGN KEY (`contact`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `task_repetition`
---
-ALTER TABLE `task_repetition`
-  ADD CONSTRAINT `fk_task_repetition_skill_type1` FOREIGN KEY (`skill_type_id`) REFERENCES `skill_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_task_repetition_tasks1` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_task_repetition_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
