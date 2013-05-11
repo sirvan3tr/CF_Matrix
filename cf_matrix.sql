@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.10.1deb1
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 08, 2013 at 05:49 PM
--- Server version: 5.5.24
--- PHP Version: 5.3.10-1ubuntu3.6
+-- Generation Time: May 11, 2013 at 09:15 PM
+-- Server version: 5.5.24-log
+-- PHP Version: 5.3.13
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `skill_hrs_bulk_addition` (
 --
 
 INSERT INTO `skill_hrs_bulk_addition` (`id`, `hrs`, `skill_type_id`, `date`) VALUES
-(1, '5', 5, '2013-05-01'),
+(1, '2.5', 5, '2013-05-01'),
 (2, '3.5', 3, '2013-06-01'),
 (3, '5', 3, '2013-05-01');
 
@@ -630,7 +630,7 @@ CREATE TABLE IF NOT EXISTS `task_repetition` (
   KEY `fk_task_repetition_tasks1_idx` (`task_id`),
   KEY `fk_task_repetition_users1_idx` (`user_id`),
   KEY `skill_type_id` (`skill_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `task_repetition`
@@ -639,7 +639,9 @@ CREATE TABLE IF NOT EXISTS `task_repetition` (
 INSERT INTO `task_repetition` (`id`, `task_id`, `date`, `user_id`, `duration`, `skill_type_id`) VALUES
 (1, 3, '2013-05-03', 1, '2.5', 5),
 (2, 3, '2013-05-03', 2, '2.5', 3),
-(3, 1, '2013-05-06', 1, '3', 2);
+(3, 1, '2013-05-06', 1, '3', 2),
+(4, 1, '2013-05-08', 1, '2.50', 2),
+(5, 1, '2013-05-08', 2, '', 1);
 
 -- --------------------------------------------------------
 

@@ -1,6 +1,6 @@
 <?php
-include('header.php');
-include('config.php');
+require_once('header.php');
+require_once('config.php');
 ?>
     <div class="container-fluid">
       <div class="row-fluid">
@@ -22,25 +22,19 @@ include('config.php');
     <input class="allocated-hours" type="text" placeholder="0.00"> <br />
     <select class="selected-task">
       <?php
-        $tasksAddition = mysqli_query($con,"SELECT id, project_name FROM tasks");
-        while($row = mysqli_fetch_array($tasksAddition))
-          {
-            $php_array[$row['id']] = $row['project_name'];
-            $php_array2 = array('abc','def','ghi');
-            $js_array = json_encode($php_array);
-
-          echo '<option taskid="'.$row['id'].'">' . $row['project_name'] .'</option>';
-          }
+		$modaltasks = ORM::for_table('tasks')->select('id')->select('project_name')->find_many();
+		foreach ($modaltasks as $modaltasks) {
+		echo '<option taskid="'.htmlspecialchars($modaltasks->id).'">'.htmlspecialchars($modaltasks->project_name).'</option>';
+		}
       ?>
     </select>
     <br />
     <select class="selected-skill-type">
       <?php
-        $tasksAdditionSKILL = mysqli_query($con,"SELECT id, skill, skill_full FROM skill_type");
-        while($row = mysqli_fetch_array($tasksAdditionSKILL))
-          {
-          echo '<option skillid="'.$row['id'].'">['.$row['skill'].'] '.$row['skill_full'].'</option>';
-          }
+	  $taskaddSkill = ORM::for_table('skill_type')->select('id')->select('skill')->select('skill_full')->find_many();
+		foreach ($taskaddSkill as $taskaddSkill) {
+		echo '<option skillid="'.htmlspecialchars($taskaddSkill->id).'">['.htmlspecialchars($taskaddSkill->skill).'] '.htmlspecialchars($taskaddSkill->skill_full).'</option>';
+		}
       ?>
     </select><br />
     
@@ -54,7 +48,7 @@ include('config.php');
 
           <form class="form-inline">
             <?php
-            $result = mysqli_query($con,"SELECT * FROM users");
+            $result = mysqli_query($conn,"SELECT * FROM users");
              
 
             $todaysdate = date('Y-m-d');
@@ -67,7 +61,6 @@ include('config.php');
               while($row = mysqli_fetch_array($result)) {
                 echo '<option>' . $row['firstname'] . " " . $row['surname'] . '</option>';
               }
-
             echo '</select> ';
             ?>
             <button id="date_btn" class="btn btn-small btn-primary" type="button">Filter</button>
