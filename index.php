@@ -37,7 +37,7 @@ require_once('config.php');
 		}
       ?>
     </select><br />
-    
+    <textarea class="task-comment" placeholder="type your comment here..."></textarea>
   </form>
   </div>
   <div class="modal-footer">
@@ -46,10 +46,12 @@ require_once('config.php');
   </div>
 </div>
 
+
+<iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;mode=WEEK&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=salmasi%40contentformula.com&amp;color=%232F6309&amp;ctz=Europe%2FLondon" style=" border-width:0 " width="800" height="600" frameborder="0" scrolling="no"></iframe>
           <form class="form-inline">
             <?php
-            $result = mysqli_query($conn,"SELECT * FROM users");
-             
+            $filterusers = ORM::for_table('users')->select('name')->find_many();
+
 
             $todaysdate = date('Y-m-d');
             $firstdate = date('Y-m-d', strtotime('-5 day', strtotime($todaysdate)));
@@ -58,9 +60,9 @@ require_once('config.php');
             echo '<input id="seconddate" type="text" placeholder="To y-m-d" value="'.$seconddate.'" class="input-small"> ';
             echo '<select>
                     <option>All users</option>';
-              while($row = mysqli_fetch_array($result)) {
-                echo '<option>' . $row['firstname'] . " " . $row['surname'] . '</option>';
-              }
+            foreach ($filterusers as $filterusers) {
+              echo '<option>'.htmlspecialchars($filterusers->name).'</option>';
+            }
             echo '</select> ';
             ?>
             <button id="date_btn" class="btn btn-small btn-primary" type="button">Filter</button>
@@ -135,6 +137,7 @@ require_once('config.php');
                           $(".newtask").unbind('click').click(function() {
 
                             var hours = $("#newtaskform").find('.allocated-hours').val();
+                            var comment = $("#newtaskform").find('.task-comment').val();
 
                             var task = $("#newtaskform").find('.selected-task');
                             var taskid = $("option:selected", task).attr("taskid");
@@ -145,7 +148,7 @@ require_once('config.php');
                             //Ajax function
                             var request = $.ajax({ url: 'new_task_script.php',
                                 type: 'post',
-                                data: {hours: hours, taskid: taskid, userid: userid, date: date, skillid: skillid},
+                                data: {hours: hours, comment: comment, taskid: taskid, userid: userid, date: date, skillid: skillid},
                                 success: function(e) {
 
                                     $('#taskAdditionModal').modal('hide')

@@ -31,12 +31,12 @@
       echo '</th>';
 
       echo "</thead><tbody>";
-      $query = mysqli_query($con, "SELECT * FROM skill_type");
-        while($row = mysqli_fetch_array($query))
-        {
+      $query = ORM::for_table('skill_type')->find_many();
+
+        foreach ($query as $query) { 
         echo "<tr>";
-        echo '<td ><span class="matrixtaskname fl"><span data-toggle="tooltip" title="" data-original-title="' . $row['skill_full'] . '" class="matrixhours" style="background-color:'.$row['color'].';">'. $row['skill'] . '</span> '.$row['skill_full'].'</td>';
-        $skilltypeid = $row['id'];
+        echo '<td ><span class="matrixtaskname fl"><span data-toggle="tooltip" title="" data-original-title="' .$query->skill_full. '" class="matrixhours" style="background-color:'.$query->color.';">'.$query->skill. '</span> '.$query->skill_full.'</td>';
+        $skilltypeid = $query->id;
 
 for ($i = 0; $i <= 11; $i++) {
         echo '<td class="content">';
@@ -47,16 +47,17 @@ for ($i = 0; $i <= 11; $i++) {
     $lastdate = date('Y-m-t', mktime(0, 0, 0, $month, 1, $year));
 
     $queryhours = mysqli_query($con, "SELECT * FROM task_repetition WHERE skill_type_id='$skilltypeid' and date >= '$firstdate' and date <= '$lastdate' ");
+    $queryhours = ORM::for_table('skill_type')->find_many();
     $querybulkhours = mysqli_query($con, "SELECT * FROM skill_hrs_bulk_addition WHERE skill_type_id='$skilltypeid' and date >= '$firstdate' and date <= '$lastdate' ");
+    $querybulkhours = ORM::for_table('skill_type')->find_many();
 
     $querytotalhrs = 0;
-    while($rowhours = mysqli_fetch_array($queryhours))
-      {
+    foreach ($querytotalhrs as $querytotalhrs) {
         $querytotalhrs = $querytotalhrs + $rowhours['duration'];
         
       }
       $querybulktotalhrs = 0;
-    while($rowbulkhours = mysqli_fetch_array($querybulkhours))
+    foreach ($querybulkhours as $querybulkhours) {
       {
         $querybulktotalhrs = $querybulktotalhrs + $rowbulkhours['hrs'];
         
@@ -94,8 +95,6 @@ include("calendar.php");
 
 
 ?>
-
-
 </table>
 <script>
 $(document).ready(function() {

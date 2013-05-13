@@ -205,3 +205,13 @@ body {
 #skill-report td.content div:hover {
 	border: 1px dashed purple;
 }
+.thetaskcomment {
+	font-size: 12px;
+	line-height: 13px;
+	border-top: 1px solid #DDD;
+	padding: 5px 0 0 0;
+	margin: 5px 0 0 0;
+}
+.usertaskstatus-done {
+	border-left: 2px solid green;
+}

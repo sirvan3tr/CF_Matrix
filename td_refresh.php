@@ -16,6 +16,11 @@ include('config.php');
            while($rowtwo = mysqli_fetch_array($repetition))
               {
                 $taskhours = $taskhours + $rowtwo['duration'];
+                $person = null;
+                if(isset($_SESSION['user_id'])){
+                  // Fetch the person from the database
+                  $person = "hello world!";
+                }
 
                 echo '<div class="tasks"><span class="matrixtaskname fl"><span data-toggle="tooltip" title="" data-original-title="' . $rowtwo['skill_full'] . '" class="matrixhours" style="background-color:'.$rowtwo['color'].';">'. $rowtwo['skill'] . '</span> <a href="project.php?projectid=' . $rowtwo['id'] .  '">' . $rowtwo['project_name'] .  '</a></span><span class="matrixhours fr"><i class="icon-time"></i> ' . $rowtwo['duration'] . '</span>
                 <div class="clear"></div>
@@ -24,6 +29,8 @@ include('config.php');
                   <i class="icon-globe"></i> <a href="' . $rowtwo['redmine_url'] . '" title="Redmine URL" target="_blank">Redmine URL</a>
                   <i class="icon-folder-open"></i> <a class="ndrivelink copy-button" data-clipboard-text="' . $rowtwo['n_url'] . '" title="Clients Drive Folder" target="_blank">N Drive</a>
                   <i userid="' . $userid .'" date="'.$testdate.'" taskid="'.$rowtwo['id'].'"class="removetask icon-remove" title="Remove this task."></i>
+                  <div class="thetaskcomment">' . $rowtwo['comment'] . '</div>
+                  '.$person.'
                 </div>
                 <div class="clear"></div>
                 </div>';

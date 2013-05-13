@@ -1,4 +1,3 @@
-<?php include("login_script.php"); ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -29,14 +28,14 @@
       <li><a href="#">About The Matrix</a></li>
       <li><a href="#"><i class="icon-filter"></i> Filter Users</a></li>
       <li><a href="skill_hours_report.php">Report</a></li>
-      <li>
-	  		<?php if($person):?>
-			<p class="greeting">Welcome, <b><?php echo htmlspecialchars($person->name)?></b> <a href="?logout" class="logoutButton">Logout</a></p>
-		<?php else:?>
-	    	<a href="<?php echo $client->createAuthUrl()?>" class="googleLoginButton">Sign in with Google</a>
-	    <?php endif;?>
-	  </li>
     </ul>
-    <a class="brand" href="#"><img src="img/pills.jpg" /></a>
+    <div id="header-login" class="fr">
+    <?php include("login_script.php"); ?>
+    <?php if($person):?>
+      <p class="greeting">Welcome, <b><?php echo htmlspecialchars($person->name)?></b> <a href="?logout" class="logoutButton">Logout</a></p>
+    <?php else:?>
+        <a href="<?php echo $client->createAuthUrl()?>" class="googleLoginButton">Sign in with Google</a>
+      <?php endif;?>
+    </div>
   </div>
 </div>
