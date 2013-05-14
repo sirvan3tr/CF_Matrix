@@ -103,6 +103,38 @@ require_once('config.php');
         }); // End of task details click
       }, // Success function
     }).done(function(data){
+                        $(document).on("click", ".fakecheckbox", function (e) {
+                          e.stopPropagation();
+                          var date = $(this).parent().closest("td").attr("date");
+                          var userid = $(this).parent().closest("td").attr("userid")
+
+                          var checkboxupdate = function() {
+                                //Ajax function
+                                $.ajax({ url: 'update_rep_status.php',
+                                  data: {date: date, userid: userid, status: status},
+                                  type: 'post',
+                                  beforeSend: function(){
+                                    $("#loading").show();
+                                  },
+                                  success: function(data) {
+                                    alert(data);
+
+                                    $("#loading").hide();
+                                  }, // Success function
+                                })
+                          }
+                          if($(this).hasClass("fakecheckboxchecked")) {
+                            $(this).removeClass("fakecheckboxchecked").css({"background": "#fff"});
+                            var status = 0;
+                            checkboxupdate();
+                          } else {
+                            $(this).addClass("fakecheckboxchecked").css({"background": "green"});
+                            var status = 1;
+                            checkboxupdate();
+                          }
+                        });
+
+
 	                      $(document).on('click', ".removetask", function () {
                             taskid = $(this).attr('taskid');
                             userid = $(this).attr('userid');

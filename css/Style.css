@@ -215,3 +215,9 @@ body {
 .usertaskstatus-done {
 	border-left: 2px solid green;
 }
+.fakecheckbox {
+	width: 8px;
+	height: 8px;
+	display: block;
+	border: 2px solid #666;
+}
