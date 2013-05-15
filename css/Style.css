@@ -216,8 +216,18 @@ body {
 	border-left: 2px solid green;
 }
 .fakecheckbox {
-	width: 8px;
-	height: 8px;
+	width: 10px;
+	height: 10px;
 	display: block;
-	border: 2px solid #666;
+	border: 1px solid #666;
+}
+.fakecheckboxfilled {
+	background: url("../img/checkbox_filled.gif") no-repeat;
+}
+.tasks .taskstatuscontainer {
+	line-height: 10px;
+}
+.tasks .taskstatuscontainer span{
+	margin: 0 0 0 5px;
+	font-size: 12px;
 }

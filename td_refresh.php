@@ -16,13 +16,21 @@ include('config.php');
            while($rowtwo = mysqli_fetch_array($repetition))
               {
                 $taskhours = $taskhours + $rowtwo['duration'];
+                
                 $person = null;
+                $isuseronline = null;
                 if(isset($_SESSION['user_id'])){
-                  // Fetch the person from the database
-                  $person = "hello world!";
+                  if($_SESSION['user_id']==$userid) {
+                    $isuseronline = "hello world!";
+                  }
                 }
 
-                echo '<div class="tasks"><span class="matrixtaskname fl"><span data-toggle="tooltip" title="" data-original-title="' . $rowtwo['skill_full'] . '" class="matrixhours" style="background-color:'.$rowtwo['color'].';">'. $rowtwo['skill'] . '</span> <a href="project.php?projectid=' . $rowtwo['id'] .  '">' . $rowtwo['project_name'] .  '</a></span><span class="matrixhours fr"><i class="icon-time"></i> ' . $rowtwo['duration'] . '</span>
+                if($rowtwo['rep_status']==1) {
+                  $divtasksclass = 'class="tasks usertaskstatus-done"';
+                } else {
+                  $divtasksclass = 'class="tasks"';
+                }
+                echo '<div '.$divtasksclass.'><div class="fakecheckbox"></div><span class="matrixtaskname fl"><span data-toggle="tooltip" title="" data-original-title="' . $rowtwo['skill_full'] . '" class="matrixhours" style="background-color:'.$rowtwo['color'].';">'. $rowtwo['skill'] . '</span> <a href="project.php?projectid=' . $rowtwo['id'] .  '">' . $rowtwo['project_name'] .  '</a></span><span class="matrixhours fr"><i class="icon-time"></i> ' . $rowtwo['duration'] . '</span>
                 <div class="clear"></div>
                 <div class="matrixdetails">
                   <a href="https://mail.google.com/mail/#inbox?compose=new" title="GMAIL Contact" target="_blank"><i class="icon-user"></i> ' . $rowtwo['firstname'] . ' ' . $rowtwo['surname'] .'</a> <br /> 
@@ -30,7 +38,8 @@ include('config.php');
                   <i class="icon-folder-open"></i> <a class="ndrivelink copy-button" data-clipboard-text="' . $rowtwo['n_url'] . '" title="Clients Drive Folder" target="_blank">N Drive</a>
                   <i userid="' . $userid .'" date="'.$testdate.'" taskid="'.$rowtwo['id'].'"class="removetask icon-remove" title="Remove this task."></i>
                   <div class="thetaskcomment">' . $rowtwo['comment'] . '</div>
-                  '.$person.'
+                  '.$isuseronline.'
+                  '.$rowtwo['rep_status'].'
                 </div>
                 <div class="clear"></div>
                 </div>';

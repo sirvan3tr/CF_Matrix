@@ -118,17 +118,17 @@ require_once('config.php');
                                   },
                                   success: function(data) {
                                     alert(data);
-
+                                    $("#id" + date + userid).html("Loading").load("td_refresh.php", {date: date, userid: userid });
                                     $("#loading").hide();
                                   }, // Success function
                                 })
                           }
-                          if($(this).hasClass("fakecheckboxchecked")) {
-                            $(this).removeClass("fakecheckboxchecked").css({"background": "#fff"});
+                          if($(this).hasClass("fakecheckboxfilled")) {
+                            $(this).removeClass("fakecheckboxfilled");
                             var status = 0;
                             checkboxupdate();
                           } else {
-                            $(this).addClass("fakecheckboxchecked").css({"background": "green"});
+                            $(this).addClass("fakecheckboxfilled");
                             var status = 1;
                             checkboxupdate();
                           }

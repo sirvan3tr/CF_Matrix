@@ -72,10 +72,12 @@ do
 
                 if($rowtwo['rep_status']==1) {
                   $divtasksclass = 'class="tasks usertaskstatus-done"';
+                  $fakecheckboxclass = 'class="fakecheckbox fakecheckboxfilled fl"';
                 } else {
                   $divtasksclass = 'class="tasks"';
+                  $fakecheckboxclass = 'class="fakecheckbox fl"';
                 }
-                echo '<div '.$divtasksclass.'><div class="fakecheckbox"></div><span class="matrixtaskname fl"><span data-toggle="tooltip" title="" data-original-title="' . $rowtwo['skill_full'] . '" class="matrixhours" style="background-color:'.$rowtwo['color'].';">'. $rowtwo['skill'] . '</span> <a href="project.php?projectid=' . $rowtwo['id'] .  '">' . $rowtwo['project_name'] .  '</a></span><span class="matrixhours fr"><i class="icon-time"></i> ' . $rowtwo['duration'] . '</span>
+                echo '<div '.$divtasksclass.'><span class="matrixtaskname fl"><span data-toggle="tooltip" title="" data-original-title="' . $rowtwo['skill_full'] . '" class="matrixhours" style="background-color:'.$rowtwo['color'].';">'. $rowtwo['skill'] . '</span> <a href="project.php?projectid=' . $rowtwo['id'] .  '">' . $rowtwo['project_name'] .  '</a></span><span class="matrixhours fr"><i class="icon-time"></i> ' . $rowtwo['duration'] . '</span>
                 <div class="clear"></div>
                 <div class="matrixdetails">
                   <a href="https://mail.google.com/mail/#inbox?compose=new" title="GMAIL Contact" target="_blank"><i class="icon-user"></i> ' . $rowtwo['firstname'] . ' ' . $rowtwo['surname'] .'</a> <br /> 
@@ -84,7 +86,7 @@ do
                   <i userid="' . $userid .'" date="'.$testdate.'" taskid="'.$rowtwo['id'].'"class="removetask icon-remove" title="Remove this task."></i>
                   <div class="thetaskcomment">' . $rowtwo['comment'] . '</div>
                   '.$isuseronline.'
-                  '.$rowtwo['rep_status'].'
+                  <div class="taskstatuscontainer"><div '.$fakecheckboxclass.'></div> <span>Toggle the status of this task!</span></div>
                 </div>
                 <div class="clear"></div>
                 </div>';
