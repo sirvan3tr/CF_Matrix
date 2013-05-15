@@ -7,44 +7,42 @@ require_once('config.php');
        
         <div class="span12">
           <!--Body content-->
-          <!-- Button to trigger modal -->
-<a href="#taskAdditionModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
- 
-<!-- Modal -->
-<div id="taskAdditionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Modal header</h3>
-  </div>
-  <div class="modal-body">
-  <form id="newtaskform">
-   
-    <input class="allocated-hours" type="text" placeholder="0.00"> <br />
-    <select class="selected-task">
-      <?php
-		$modaltasks = ORM::for_table('tasks')->select('id')->select('project_name')->find_many();
-		foreach ($modaltasks as $modaltasks) {
-		echo '<option taskid="'.htmlspecialchars($modaltasks->id).'">'.htmlspecialchars($modaltasks->project_name).'</option>';
-		}
-      ?>
-    </select>
-    <br />
-    <select class="selected-skill-type">
-      <?php
-	  $taskaddSkill = ORM::for_table('skill_type')->select('id')->select('skill')->select('skill_full')->find_many();
-		foreach ($taskaddSkill as $taskaddSkill) {
-		echo '<option skillid="'.htmlspecialchars($taskaddSkill->id).'">['.htmlspecialchars($taskaddSkill->skill).'] '.htmlspecialchars($taskaddSkill->skill_full).'</option>';
-		}
-      ?>
-    </select><br />
-    <textarea class="task-comment" placeholder="type your comment here..."></textarea>
-  </form>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary newtask">Save changes</button>
-  </div>
-</div>
+
+          <!-- Modal -->
+          <div id="taskAdditionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel">Modal header</h3>
+            </div>
+            <div class="modal-body">
+            <form id="newtaskform">
+             
+              <input class="allocated-hours" type="text" placeholder="0.00"> <br />
+              <select class="selected-task">
+                <?php
+          		$modaltasks = ORM::for_table('tasks')->select('id')->select('project_name')->find_many();
+          		foreach ($modaltasks as $modaltasks) {
+          		echo '<option taskid="'.htmlspecialchars($modaltasks->id).'">'.htmlspecialchars($modaltasks->project_name).'</option>';
+          		}
+                ?>
+              </select>
+              <br />
+              <select class="selected-skill-type">
+                <?php
+          	  $taskaddSkill = ORM::for_table('skill_type')->select('id')->select('skill')->select('skill_full')->find_many();
+          		foreach ($taskaddSkill as $taskaddSkill) {
+          		echo '<option skillid="'.htmlspecialchars($taskaddSkill->id).'">['.htmlspecialchars($taskaddSkill->skill).'] '.htmlspecialchars($taskaddSkill->skill_full).'</option>';
+          		}
+                ?>
+              </select><br />
+              <textarea class="task-comment" placeholder="type your comment here..."></textarea>
+            </form>
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+              <button class="btn btn-primary newtask">Save changes</button>
+            </div>
+          </div><!-- end of modal -->
 
           <form class="form-inline">
             <?php

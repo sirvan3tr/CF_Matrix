@@ -33,7 +33,7 @@
       echo "</thead><tbody>";
       $query = ORM::for_table('skill_type')->find_many();
 	  
-      foreach ($query as $query) { 
+      foreach ($query as $query) {
         echo "<tr>";
         echo '<td ><span class="matrixtaskname fl"><span data-toggle="tooltip" title="" data-original-title="' .$query->skill_full. '" class="matrixhours" style="background-color:'.$query->color.';">'.$query->skill. '</span> '.$query->skill_full.'</td>';
         $skilltypeid = $query->id;
@@ -48,7 +48,7 @@ for ($i = 0; $i <= 11; $i++) {
     $lastdate = date('Y-m-t', mktime(0, 0, 0, $month, 1, $year));
 
     $queryhours = ORM::for_table('task_repetition')->where('skill_type_id', $skilltypeid)->where_gte('date', $firstdate)->where_lte('date', $lastdate)->find_many();
-    $querybulkhours = ORM::for_table('task_repetition')->where('skill_type_id', $skilltypeid)->where_gte('date', $firstdate)->where_lte('date', $lastdate)->find_many();
+    $querybulkhours = ORM::for_table('skill_hrs_bulk_addition')->where('skill_type_id', $skilltypeid)->where_gte('date', $firstdate)->where_lte('date', $lastdate)->find_many();
 
     $querytotalhrs = 0;
     foreach ($queryhours as $queryhours) {
@@ -59,19 +59,21 @@ for ($i = 0; $i <= 11; $i++) {
         $querybulktotalhrs = $querybulktotalhrs + $querybulkhours->hrs;
       }
       $totalhrs = $querytotalhrs + $querybulktotalhrs;
-      echo '<div class="hours-div" querytotalhrs="'.$querytotalhrs.'" querybulktotalhrs="'.$querybulktotalhrs.'" date="'.$firstdate.'" skilltypeid="'.$skilltypeid.'" data-toggle="tooltip" data-original-title="Click here to add bulk hours for this skill type">'.$totalhrs.'</div>';
+      echo '<div class="hours-div" month="'.date("F",strtotime($i."Months")).'" totalhrs="'.$totalhrs.'" querytotalhrs="'.$querytotalhrs.'" querybulktotalhrs="'.$querybulktotalhrs.'" date="'.$firstdate.'" skilltypeid="'.$skilltypeid.'" data-toggle="tooltip" data-original-title="Click here to add bulk hours for this skill type">'.$totalhrs.'</div>';
      
       echo "</td>";
-		$overalltotalhrs = $overalltotalhrs + $totalhrs;
+		
 }
         echo "</tr>";
         }
      ?>
 	 <tr>
 		 <td><b>Total hours:</b></td>
-		 <td>
-			<?php echo $overalltotalhrs; ?>
-		 </td>
+			<?php
+        for ($i = 0; $i <= 11; $i++) {
+            echo '<td class="overalltotalhrs content" month="'.date("F",strtotime($i."Months")).'"></td>';
+        }
+      ?>
 	 </tr>
     </table>
     </div><!-- /span12 -->
@@ -100,6 +102,20 @@ include("calendar.php");
 </table>
 <script>
 $(document).ready(function() {
+  var totalhoursfunction = function() {
+    $(".overalltotalhrs").each(function() {
+      month = $(this).attr("month");
+      totalhrs = 0;
+      $(".content").find('[month="'+month+'"]').each(function() {
+        var divmonth = $(this).attr("month");
+        var divtotalhrs = $(this).attr("totalhrs");
+        totalhrs = parseFloat(totalhrs)+parseFloat(divtotalhrs);
+      })
+      $(this).text(totalhrs);
+    })
+  }
+  totalhoursfunction();
+
   $("span").tooltip();
   $("div").tooltip();
 
