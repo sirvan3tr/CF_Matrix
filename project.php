@@ -13,11 +13,13 @@
 include('config.php');
 
 $projectid = $_GET['projectid'];
-$user = mysqli_query($con,"SELECT * FROM tasks WHERE id='$projectid'");
-$projectrow = mysqli_fetch_array($user);
-$totalhrs = $projectrow['hours'];
-$hrsspent = $projectrow['hrs_spent'];
-$totalgbp = $projectrow['gbp_total_amount'];
+
+$user = ORM::for_table('tasks')->find_one($projectid);
+
+
+$totalhrs = $user->hours;
+$hrsspent = $user->hrs_spent;
+$totalgbp = $user->gbp_total_amount;
 $hrsremaining = $totalhrs - $hrsspent;
 $rate = round($totalgbp/$totalhrs,3);
 $perchrsspent = round(($hrsspent/$totalhrs)*100, 3);
@@ -61,8 +63,8 @@ $cost = $totalgbp - $profit;
 
         echo "</div>"; // /Span3
         echo '<div class="span9">';
-            echo '<h1>'.$projectrow['project_name']. ' [' .$projectrow['status']. ']</h1>';
-            echo '<h5>Project number: '.$projectrow['job_nr']. '</h5>';
+            echo '<h1>'.$user->project_name. ' [' .$user->status. ']</h1>';
+            echo '<h5>Project number: '.$user->job_nr. '</h5>';
             echo '<div class="projecthours">
                     <h4>Profit</h4>
                     <div class="content text-info">

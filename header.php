@@ -19,15 +19,15 @@
   <body>
     <div id="loading">Loading, Please wait...</div>
 <div id="mainnav" class="navbar">
-  <div class="navbar-inner">
+  <div class="navbar-inner-matrix">
     <a class="brand" href="#"><img src="img/matrix-beta.png" /></a>
     <ul class="nav">
       <li class="active"><a href="index.php">Home</a></li>
       <li><a href="projects.php">Users</a></li>
-      <li><a href="project.php">Project</a></li>
-      <li><a href="#">About The Matrix</a></li>
+      <li><a href="projects.php">Projects</a></li>
+      <li><a href="about_us.php">About The Matrix</a></li>
       <li><a href="#"><i class="icon-filter"></i> Filter Users</a></li>
-      <li><a href="skill_hours_report.php">Report</a></li>
+      <li><a href="skill_hours_report.php">Mainframe</a></li>
     </ul>
     <div id="header-login" class="fr">
     <?php include("login_script.php"); ?>

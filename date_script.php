@@ -65,6 +65,7 @@ do
                 $person = null;
                 $isuseronline = null;
                 if(isset($_SESSION['user_id'])){
+                $person = ORM::for_table('users')->find_one($_SESSION['user_id']);
                   if($_SESSION['user_id']==$userid) {
                     $isuseronline = "hello world!";
                   }
@@ -83,10 +84,10 @@ do
                   <a href="https://mail.google.com/mail/#inbox?compose=new" title="GMAIL Contact" target="_blank"><i class="icon-user"></i> ' . $rowtwo['firstname'] . ' ' . $rowtwo['surname'] .'</a> <br /> 
                   <i class="icon-globe"></i> <a href="' . $rowtwo['redmine_url'] . '" title="Redmine URL" target="_blank">Redmine URL</a>
                   <i class="icon-folder-open"></i> <a class="ndrivelink copy-button" data-clipboard-text="' . $rowtwo['n_url'] . '" title="Clients Drive Folder" target="_blank">N Drive</a>
-                  <i userid="' . $userid .'" date="'.$testdate.'" taskid="'.$rowtwo['id'].'"class="removetask icon-remove" title="Remove this task."></i>
+                  <i userid="' . $userid .'" date="'.$testdate.'" taskid="'.$rowtwo['id'].'"class="removetask icon-remove" title="Remove this task." data-toggle="tooltip" data-original-title="Remove this task."></i>
                   <div class="thetaskcomment">' . $rowtwo['comment'] . '</div>
                   '.$isuseronline.'
-                  <div class="taskstatuscontainer"><div '.$fakecheckboxclass.'></div> <span>Toggle the status of this task!</span></div>
+                  <div class="taskstatuscontainer" data-toggle="tooltip" data-original-title="Toggle the status of this task"><div '.$fakecheckboxclass.'></div><span></span></div>
                 </div>
                 <div class="clear"></div>
                 </div>';
@@ -99,7 +100,17 @@ do
               } else {
                 echo '<div class="totalend underbooked">Total hrs: '.$taskhours.'</div>';
               }
-              echo '<p class="text-center task-addition" userid="' . $row['id'] .'" username="' . $row['firstname'] . $row['surname'] . '"  date="'.$testdate.'" >Add new task!</p>';
+              if(isset($_SESSION['user_id'])){
+                $person = ORM::for_table('users')->find_one($_SESSION['user_id']);
+                if ($person->ability=="architect" || $person->ability=="oracle") {
+                  echo '<p class="text-center task-addition" userid="' . $row['id'] .'" username="' . $row['firstname'] . $row['surname'] . '"  date="'.$testdate.'" >Add new task!</p>';
+                } else {
+                  // Do nothing
+                }
+              }
+
+
+              
               
 
           echo '</td>';
@@ -117,6 +128,8 @@ echo '</table>';
 <script>
 $(document).ready(function() {
         $("span").tooltip();
+        $("div").tooltip();
+        $("i").tooltip();
 
 
 })

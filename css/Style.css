@@ -79,6 +79,7 @@ body {
 	width: 220px;
 	position: relative;
 	border: 1px solid #f6f6f6;
+	font-weight: bold;
 }
 .matrix-row {
 	border-bottom: 1px solid #ddd;
@@ -86,18 +87,27 @@ body {
 }
 .matrixdetails {
 	display: none;
+	font-size: 12px;
+	//background-color: #F5F5F5;
+	margin: 5px -5px -5px -5px;
+	padding: 5px;
+	font-weight: normal;
 }
 .alltasks {
 	vertical-align: top;
 	padding: 15px;
 	border-left: 1px solid #f3f3f3;
+	padding: 0 15px 0 15px;
 }
 .task-addition {
-	color:#fff;
+	color:#ddd;
 	cursor:pointer;
+	margin: 10px 0 0 0;
+	border: 1px dashed #ddd;
 }
 .task-addition:hover {
-	border: 1px dashed grey;
+	border: 1px dashed #ddd;
+	background-color: #EBF2E9;
 	color:#666;
 }
 .newtaskform {
@@ -105,9 +115,10 @@ body {
 }
 .totalend {
 	display: block;
-	line-height: 20px;
+	line-height: 15px;
 	text-align: right;
 	padding-right: 4px;
+	font-size: 11px;
 	//background:url("../img/avail-meter.jpg") no-repeat;
 }
 .booked {
@@ -195,7 +206,9 @@ body {
 .matrixtaskname {
 	width: 170px;
 }
-
+.matrixtaskname a {
+	color: #666;
+}
 #skill-report td.content {
 	text-align: center;
 }
@@ -214,20 +227,34 @@ body {
 }
 .usertaskstatus-done {
 	border-left: 2px solid green;
+	background-color: #EEE;
+	font-weight: normal;
 }
 .fakecheckbox {
 	width: 10px;
 	height: 10px;
 	display: block;
 	border: 1px solid #666;
+	background-color: #FFF;
 }
 .fakecheckboxfilled {
 	background: url("../img/checkbox_filled.gif") no-repeat;
 }
 .tasks .taskstatuscontainer {
 	line-height: 10px;
+	position: absolute;
+	top: 16px;
+	right: -3px;
 }
 .tasks .taskstatuscontainer span{
 	margin: 0 0 0 5px;
 	font-size: 12px;
+}
+.navbar-inner-matrix {
+	min-height: 40px;
+	padding-right: 20px;
+	padding-left: 20px;
+	background-color: #FAFAFA;
+	background: url(../img/cream_pixels.png);
+	border-bottom: 1px solid #EEE;
 }

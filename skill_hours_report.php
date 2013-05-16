@@ -68,13 +68,34 @@ for ($i = 0; $i <= 11; $i++) {
         }
      ?>
 	 <tr>
-		 <td><b>Total hours:</b></td>
+		 <td><b>Total hours (hrs)</b></td>
 			<?php
         for ($i = 0; $i <= 11; $i++) {
             echo '<td class="overalltotalhrs content" month="'.date("F",strtotime($i."Months")).'"></td>';
         }
       ?>
 	 </tr>
+  <tr>
+     <td><b>Resources available (hrs)</b></td>
+      <?php
+      $resources = ORM::for_table('users')->find_many();
+      $totalresources = 0;
+      foreach ($resources as $resources) {
+        $totalresources = $totalresources + $resources->working_hrs;
+      }
+        for ($i = 0; $i <= 11; $i++) {
+            echo '<td class="totalresources content" month="'.date("F",strtotime($i."Months")).'">'.$totalresources.'</td>';
+        }
+      ?>
+  </tr>
+  <tr>
+     <td><b>Available hrs</b></td>
+      <?php
+        for ($i = 0; $i <= 11; $i++) {
+            echo '<td class="differenceinhours content" month="'.date("F",strtotime($i."Months")).'"></td>';
+        }
+      ?>
+  </tr>
     </table>
     </div><!-- /span12 -->
   </div>
@@ -115,6 +136,23 @@ $(document).ready(function() {
     })
   }
   totalhoursfunction();
+
+  var differencehrs = function() {
+    $(".differenceinhours").each(function() {
+      month = $(this).attr("month");
+      console.log(month);
+
+      totalhrs = $('.overalltotalhrs[month="'+month+'"]').html();
+      console.log(totalhrs);
+      totalresources = $('.totalresources[month="'+month+'"]').html();
+      console.log(totalresources );
+      differencehrs = parseFloat(totalresources) - parseFloat(totalhrs);
+
+      $(this).html(differencehrs);
+    })
+  }
+
+  differencehrs();
 
   $("span").tooltip();
   $("div").tooltip();
