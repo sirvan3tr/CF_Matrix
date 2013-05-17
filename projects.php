@@ -5,12 +5,34 @@
 
         <div class="span12">
           <!--Body content-->
-          <?php
-            $tasks = ORM::for_table('tasks')->find_many();
-            foreach($tasks as $tasks) {
-              echo '<div><a href="project.php?projectid='.$tasks->id.'">'.$tasks->project_name.'</a></div>';
-            }
-          ?>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Project name</th>
+                <th>Job number</th>
+                <th>Status</th>
+                <th>Hours</th>
+                <th>Total amount (GBP)</th>
+                <th>Client main contact</th>
+                <th>Sold by</th>
+              </tr>
+            </thead>
+            <tbody>
+            <?php
+              $tasks = ORM::for_table('tasks')->find_many();
+              foreach($tasks as $tasks) {
+                echo '<tr class="taskstatus-'.$tasks->status.'"><td><a href="project.php?projectid='.$tasks->id.'">'.$tasks->project_name.'</a></td>';
+                echo '<td>'.$tasks->job_nr.'</td>';
+                echo '<td>'.$tasks->status.'</td>';
+                echo '<td>'.$tasks->hours.'</td>';
+                echo '<td>'.$tasks->gbp_total_amount.'</td>';
+                echo '<td>'.$tasks->client_main_contact.'</td>';
+                echo '<td>'.$tasks->sold_by.'</td></tr>';
+              }
+            ?>
+            
+            </tbody>
+          </table>
         </div><!-- /span12 -->
       </div>
     </div>

@@ -62,15 +62,6 @@ do
               {
                 $taskhours = $taskhours + $rowtwo['duration'];
 
-                $person = null;
-                $isuseronline = null;
-                if(isset($_SESSION['user_id'])){
-                $person = ORM::for_table('users')->find_one($_SESSION['user_id']);
-                  if($_SESSION['user_id']==$userid) {
-                    $isuseronline = "hello world!";
-                  }
-                }
-
                 if($rowtwo['rep_status']==1) {
                   $divtasksclass = 'class="tasks usertaskstatus-done"';
                   $fakecheckboxclass = 'class="fakecheckbox fakecheckboxfilled fl"';
@@ -78,6 +69,16 @@ do
                   $divtasksclass = 'class="tasks"';
                   $fakecheckboxclass = 'class="fakecheckbox fl"';
                 }
+
+                $person = null;
+                $isuseronline = null;
+                if(isset($_SESSION['user_id'])){
+                $person = ORM::for_table('users')->find_one($_SESSION['user_id']);
+                  if($_SESSION['user_id']==$userid) {
+                    $isuseronline = '<div class="taskstatuscontainer" data-toggle="tooltip" data-original-title="Toggle the status of this task"><div '.$fakecheckboxclass.'></div><span></span></div>';
+                  }
+                }
+
                 echo '<div '.$divtasksclass.'><span class="matrixtaskname fl"><span data-toggle="tooltip" title="" data-original-title="' . $rowtwo['skill_full'] . '" class="matrixhours" style="background-color:'.$rowtwo['color'].';">'. $rowtwo['skill'] . '</span> <a href="project.php?projectid=' . $rowtwo['id'] .  '">' . $rowtwo['project_name'] .  '</a></span><span class="matrixhours fr"><i class="icon-time"></i> ' . $rowtwo['duration'] . '</span>
                 <div class="clear"></div>
                 <div class="matrixdetails">
@@ -87,7 +88,6 @@ do
                   <i userid="' . $userid .'" date="'.$testdate.'" taskid="'.$rowtwo['id'].'"class="removetask icon-remove" title="Remove this task." data-toggle="tooltip" data-original-title="Remove this task."></i>
                   <div class="thetaskcomment">' . $rowtwo['comment'] . '</div>
                   '.$isuseronline.'
-                  <div class="taskstatuscontainer" data-toggle="tooltip" data-original-title="Toggle the status of this task"><div '.$fakecheckboxclass.'></div><span></span></div>
                 </div>
                 <div class="clear"></div>
                 </div>';

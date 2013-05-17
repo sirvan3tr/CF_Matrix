@@ -22,7 +22,7 @@
   <div class="navbar-inner-matrix">
     <a class="brand" href="#"><img src="img/matrix-beta.png" /></a>
     <ul class="nav">
-      <li class="active"><a href="index.php">Home</a></li>
+      <li><a href="index.php">Home</a></li>
       <li><a href="projects.php">Users</a></li>
       <li><a href="projects.php">Projects</a></li>
       <li><a href="about_us.php">About The Matrix</a></li>

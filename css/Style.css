@@ -258,3 +258,9 @@ body {
 	background: url(../img/cream_pixels.png);
 	border-bottom: 1px solid #EEE;
 }
+.taskstatus-Closed {
+	background-color: #F6FCF5;
+}
+.taskstatus-Cancelled {
+	background-color: #FFE3E3;
+}
