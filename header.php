@@ -17,25 +17,25 @@
     
   </head>
   <body>
-    <div id="loading">Loading, Please wait...</div>
+    <div id="loading"><div id="loadingtxt"><img src="img/ajax-loader-purple.gif" /> Loading, Please wait...</div></div>
 <div id="mainnav" class="navbar">
   <div class="navbar-inner-matrix">
-    <a class="brand" href="#"><img src="img/matrix-beta.png" /></a>
+    <a class="brand" href="#"><img id="headermainlogo" src="img/matrix-beta.png" /></a>
     <ul class="nav">
       <li><a href="index.php">Home</a></li>
       <li><a href="projects.php">Users</a></li>
       <li><a href="projects.php">Projects</a></li>
       <li><a href="about_us.php">About The Matrix</a></li>
-      <li><a href="#"><i class="icon-filter"></i> Filter Users</a></li>
       <li><a href="skill_hours_report.php">Mainframe</a></li>
     </ul>
     <div id="header-login" class="fr">
     <?php include("login_script.php"); ?>
     <?php if($person):?>
-      <p class="greeting">Welcome, <b><?php echo htmlspecialchars($person->name)?></b> <a href="?logout" class="logoutButton">Logout</a></p>
+      <div class="greeting">Welcome, <b><?php echo htmlspecialchars($person->name)?></b> <a href="?logout" class="logoutButton">Logout</a></div>
     <?php else:?>
-        <a href="<?php echo $client->createAuthUrl()?>" class="googleLoginButton">Sign in with Google</a>
+        <div class="greeting"><a href="<?php echo $client->createAuthUrl()?>" class="googleLoginButton">Sign in with Google</a></div>
       <?php endif;?>
+
     </div>
   </div>
 </div>

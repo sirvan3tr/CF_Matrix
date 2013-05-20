@@ -177,7 +177,7 @@ if(isset($_SESSION['user_id'])){
 <div class="login-container">
 <h1 class="login-header">Enter the Matrix</h1>
 	<div id="login-body">
-		
+		<a href="../index.php" />Go back to home...</a>
 		<?php if($person):?>
 			<div id="avatar" style="background-image:url(<?php echo $person->photo?>?sz=58)"></div>
 			<p class="greeting">Welcome, <b><?php echo htmlspecialchars($person->name)?></b></p>

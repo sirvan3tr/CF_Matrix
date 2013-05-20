@@ -50,9 +50,9 @@ do
           //echo '<div class="username">' . $row['firstname'] . " " . $row['surname'] . '</div>';
          $repetition = mysqli_query($con,"SELECT * 
           FROM task_repetition 
-          INNER JOIN users ON task_repetition.user_id=users.id
-          INNER JOIN tasks ON task_repetition.task_id=tasks.id
-          INNER JOIN skill_type ON task_repetition.skill_type_id=skill_type.id
+          RIGHT JOIN users ON task_repetition.user_id=users.id
+          RIGHT JOIN tasks ON task_repetition.task_id=tasks.id
+          RIGHT JOIN skill_type ON task_repetition.skill_type_id=skill_type.id
           WHERE date='$testdate' && user_id='$userid' ");
 
          echo '<td date="'.$testdate.'" userid="'.$userid.'" id="id'.$testdate.$userid.'" class="alltasks">';
@@ -108,10 +108,6 @@ do
                   // Do nothing
                 }
               }
-
-
-              
-              
 
           echo '</td>';
       }

@@ -1,0 +1,15 @@
+<table>
+<tbody id="tbody">
+<tr>
+<td>Date</td>
+<td>Sell</td>
+<td>Buy</td>
+</tr>
+</tbody>
+</table>
+
+var script = document.createElement('script');script.src = "https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js";document.getElementsByTagName('head')[0].appendChild(script);
+
+setInterval(function () {
+$("#tbody").append("<tr><td>"+new Date()+"</td><td>"+$("#ftsesell").text()+"</td><td>"+$("#ftsebuy").text()+"</td></tr");
+    },10000);

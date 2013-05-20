@@ -12,7 +12,7 @@ require_once('config.php');
           <div id="taskAdditionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel">Modal header</h3>
+              <h3 id="myModalLabel">Add a new task</h3>
             </div>
             <div class="modal-body">
             <form id="newtaskform">
@@ -40,6 +40,7 @@ require_once('config.php');
             </div>
             <div class="modal-footer">
               <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+              <img id="modalloader" src="img/ajax-loader.gif" />
               <button class="btn btn-primary newtask">Save changes</button>
             </div>
           </div><!-- end of modal -->
@@ -50,8 +51,8 @@ require_once('config.php');
 
 
             $todaysdate = date('Y-m-d');
-            $firstdate = date('Y-m-d', strtotime('-5 day', strtotime($todaysdate)));
-            $seconddate = date('Y-m-d', strtotime('+5 day', strtotime($todaysdate)));
+            $firstdate = date('Y-m-d', strtotime('-1 day', strtotime($todaysdate)));
+            $seconddate = date('Y-m-d', strtotime('+11 day', strtotime($todaysdate)));
             echo '<input id="firstdate" type="text" placeholder="From y-m-d" value="'.$firstdate.'" class="input-small"> ';
             echo '<input id="seconddate" type="text" placeholder="To y-m-d" value="'.$seconddate.'" class="input-small"> ';
             echo '<select>
@@ -101,6 +102,7 @@ require_once('config.php');
         }); // End of task details click
       }, // Success function
     }).done(function(data){
+
                         $(document).on("click", ".fakecheckbox", function (e) {
                           e.stopPropagation();
                           var date = $(this).parent().closest("td").attr("date");
@@ -177,8 +179,11 @@ require_once('config.php');
                             var request = $.ajax({ url: 'new_task_script.php',
                                 type: 'post',
                                 data: {hours: hours, comment: comment, taskid: taskid, userid: userid, date: date, skillid: skillid},
+                                beforeSend: function(){
+                                    $("#modalloader").show();
+                                },
                                 success: function(e) {
-
+                                    $("#modalloader").hide();
                                     $('#taskAdditionModal').modal('hide')
                                     $("#id" + date + userid).html("Loading").load("td_refresh.php", {date: date, userid: userid });
                                 },
