@@ -35,7 +35,7 @@
 	  
       foreach ($query as $query) {
         echo "<tr>";
-        echo '<td ><span class="matrixtaskname fl"><span data-toggle="tooltip" title="" data-original-title="' .$query->skill_full. '" class="matrixhours" style="background-color:'.$query->color.';">'.$query->skill. '</span> '.$query->skill_full.'</td>';
+        echo '<td ><span class="matrixtaskname fl"><span data-toggle="tooltip" title="" data-original-title="' .$query->skill_full. '" class="matrixhours light" style="background-color:'.$query->color.';">'.$query->skill. '</span> '.$query->skill_full.'</td>';
         $skilltypeid = $query->id;
 		
 		$overalltotalhrs = 0;
@@ -140,18 +140,15 @@ $(document).ready(function() {
   var differencehrs = function() {
     $(".differenceinhours").each(function() {
       month = $(this).attr("month");
-      console.log(month);
 
       totalhrs = $('.overalltotalhrs[month="'+month+'"]').html();
-      console.log(totalhrs);
       totalresources = $('.totalresources[month="'+month+'"]').html();
-      console.log(totalresources );
       differencehrs = parseFloat(totalresources) - parseFloat(totalhrs);
+      differencedays = differencehrs/7.5;
 
-      $(this).html(differencehrs);
+      $(this).html(differencehrs+'<div>Days: '+differencedays+'</div>');
     })
   }
-
   differencehrs();
 
   $("span").tooltip();

@@ -73,13 +73,14 @@ body {
 }
 .tasks {
 	padding: 5px;
-	background-color: #fff;
+	background-color: #FFF;
 	cursor: pointer;
 	margin-bottom: 2px;
 	width: 220px;
 	position: relative;
-	border: 1px solid #f6f6f6;
-	font-weight: bold;
+	box-shadow: 0px -5px 25px -10px #CCC;
+	-moz-box-shadow: 0px -5px 25px -10px #CCC;
+  	-webkit-box-shadow: 0px -5px 25px -10px #CCC;
 }
 .matrix-row {
 	border-bottom: 1px solid #ddd;
@@ -144,9 +145,6 @@ body {
 	border-bottom: 6px solid #fff;
 }
 .removetask {
-	position: absolute;
-	top: 0;
-	right: 0;
 	background-color: #fff;
 }
 /*
@@ -203,10 +201,20 @@ body {
 	left: 50%;
 }
 .matrixtaskname {
-	width: 170px;
+	width: 180px;
+	font-size: 16px;
+	padding: 5px 0;
 }
 .matrixtaskname a {
 	color: #666;
+}
+.taskhoursbig {
+	display: block;
+	float: right;
+	font-size: 18px;
+	font-weight: bold;
+	padding: 5px;
+	color: #08C;
 }
 #skill-report td.content {
 	text-align: center;
@@ -253,7 +261,7 @@ body {
 	min-height: 30px;
 	padding-right: 20px;
 	padding-left: 20px;
-	background-color: #702a68;
+	background-color: #333;
 	//background: url(../img/cream_pixels.png);
 	//border-bottom: 1px solid #EEE;
 }
@@ -265,9 +273,9 @@ body {
 	text-shadow: none;
 }
 .navbar .nav>li>a:focus, .navbar .nav>li>a:hover {
-	color: #f0f0f0;
+	color: #333;
 	text-decoration: none;
-	background-color: transparent;
+	background-color: #FFF;
 }
 .taskstatus-Closed {
 	background-color: #F6FCF5;
@@ -293,8 +301,28 @@ body {
 }
 #header-login {
 	color: #fff;
+	padding: 5px;
 }
 #header-login a {
 	color: rgb(168, 226, 255);
 	text-decoration: underline;
+}
+.navbar .brand {
+	display: block;
+	float: left;
+	padding: 5px 20px 10px;
+	margin-left: -20px;	
+	font-size: 20px;
+	font-weight: 200;
+	color: #777;
+	text-shadow: 0 1px 0 #000;
+}
+.allocated-hours-con select {
+	margin: 0 0 5px 0;
+}
+.dark {
+	color: #333;
+}
+.light {
+	color: #fff;
 }

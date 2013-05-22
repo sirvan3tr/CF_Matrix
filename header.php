@@ -20,7 +20,7 @@
     <div id="loading"><div id="loadingtxt"><img src="img/ajax-loader-purple.gif" /> Loading, Please wait...</div></div>
 <div id="mainnav" class="navbar">
   <div class="navbar-inner-matrix">
-    <a class="brand" href="#"><img id="headermainlogo" src="img/matrix-beta.png" /></a>
+    <a class="brand" href="#">Paradise Matrix Beta</a>
     <ul class="nav">
       <li><a href="index.php">Home</a></li>
       <li><a href="projects.php">Users</a></li>

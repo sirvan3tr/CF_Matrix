@@ -7,7 +7,9 @@ require_once('config.php');
        
         <div class="span12">
           <!--Body content-->
-
+          <button class="btn btn-small btn-primary" id="togglehrs">Toggle Total Hours</button>
+          <button class="btn btn-small btn-primary" id="toggletasks">Toggle Add new task</button>
+          <button class="btn btn-small btn-primary" id="toggleactions">Toggle Actions</button>
           <!-- Modal -->
           <div id="taskAdditionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-header">
@@ -15,27 +17,32 @@ require_once('config.php');
               <h3 id="myModalLabel">Add a new task</h3>
             </div>
             <div class="modal-body">
-            <form id="newtaskform">
-             
-              <input class="allocated-hours" type="text" placeholder="0.00"> <br />
-              <select class="selected-task">
-                <?php
-          		$modaltasks = ORM::for_table('tasks')->select('id')->select('project_name')->find_many();
-          		foreach ($modaltasks as $modaltasks) {
-          		echo '<option taskid="'.htmlspecialchars($modaltasks->id).'">'.htmlspecialchars($modaltasks->project_name).'</option>';
-          		}
-                ?>
-              </select>
-              <br />
-              <select class="selected-skill-type">
-                <?php
-          	  $taskaddSkill = ORM::for_table('skill_type')->select('id')->select('skill')->select('skill_full')->find_many();
-          		foreach ($taskaddSkill as $taskaddSkill) {
-          		echo '<option skillid="'.htmlspecialchars($taskaddSkill->id).'">['.htmlspecialchars($taskaddSkill->skill).'] '.htmlspecialchars($taskaddSkill->skill_full).'</option>';
-          		}
-                ?>
-              </select><br />
-              <textarea class="task-comment" placeholder="type your comment here..."></textarea>
+            <form id="newtaskform" class="form-horizontal">
+              <div class="fl allocated-hours-con">
+                <label><b>Insert number of hours:</b></label>
+                <input class="allocated-hours input-small" type="text" placeholder="0.00">
+              </div>
+
+              <div class="fr allocated-hours-con">
+                <select class="selected-task">
+                  <?php
+            		$modaltasks = ORM::for_table('tasks')->select('id')->select('project_name')->find_many();
+            		foreach ($modaltasks as $modaltasks) {
+            		echo '<option taskid="'.htmlspecialchars($modaltasks->id).'">'.htmlspecialchars($modaltasks->project_name).'</option>';
+            		}
+                  ?>
+                </select>
+                <br />
+                <select class="selected-skill-type">
+                  <?php
+            	  $taskaddSkill = ORM::for_table('skill_type')->select('id')->select('skill')->select('skill_full')->find_many();
+            		foreach ($taskaddSkill as $taskaddSkill) {
+            		echo '<option skillid="'.htmlspecialchars($taskaddSkill->id).'">['.htmlspecialchars($taskaddSkill->skill).'] '.htmlspecialchars($taskaddSkill->skill_full).'</option>';
+            		}
+                  ?>
+                </select><br />
+                <textarea class="task-comment" placeholder="Insert your comment here..."></textarea>
+              </div>
             </form>
             </div>
             <div class="modal-footer">
@@ -47,7 +54,7 @@ require_once('config.php');
 
           <form class="form-inline">
             <?php
-            $filterusers = ORM::for_table('users')->select('name')->find_many();
+            /*$filterusers = ORM::for_table('users')->select('name')->find_many();*/
 
 
             $todaysdate = date('Y-m-d');
@@ -55,12 +62,14 @@ require_once('config.php');
             $seconddate = date('Y-m-d', strtotime('+11 day', strtotime($todaysdate)));
             echo '<input id="firstdate" type="text" placeholder="From y-m-d" value="'.$firstdate.'" class="input-small"> ';
             echo '<input id="seconddate" type="text" placeholder="To y-m-d" value="'.$seconddate.'" class="input-small"> ';
+            /*
             echo '<select>
                     <option>All users</option>';
             foreach ($filterusers as $filterusers) {
               echo '<option>'.htmlspecialchars($filterusers->name).'</option>';
             }
             echo '</select> ';
+            */
             ?>
             <button id="date_btn" class="btn btn-small btn-primary" type="button">Filter</button>
           </form>
@@ -102,33 +111,47 @@ require_once('config.php');
         }); // End of task details click
       }, // Success function
     }).done(function(data){
+                        //Toggle Hours
+                        $("#togglehrs").click(function () {
+                          $(".totalend").toggle();
+                        });
 
-                        $(document).on("click", ".fakecheckbox", function (e) {
+                        $("#toggletasks").click(function () {
+                          $(".task-addition").toggle();
+                        });
+                        $("#toggleactions").click(function () {
+                          $(".actions").toggle();
+                        });
+
+
+                        $(document).on("click", ".taskstatusA", function (e) {
                           e.stopPropagation();
                           var date = $(this).parent().closest("td").attr("date");
-                          var userid = $(this).parent().closest("td").attr("userid")
+                          var workinghrs = $(this).parent().closest("td").attr("workinghrs");
+                          var userid = $(this).parent().closest("td").attr("userid");
+                          var taskid = $(this).attr("taskid");
 
                           var checkboxupdate = function() {
                                 //Ajax function
                                 $.ajax({ url: 'update_rep_status.php',
-                                  data: {date: date, userid: userid, status: status},
+                                  data: {taskid: taskid, status: status},
                                   type: 'post',
                                   beforeSend: function(){
                                     $("#loading").show();
                                   },
                                   success: function(data) {
                                     alert(data);
-                                    $("#id" + date + userid).html("Loading").load("td_refresh.php", {date: date, userid: userid });
+                                    $("#id" + date + userid).html("Loading").load("td_refresh.php", {date: date, userid: userid, workinghrs: workinghrs });
                                     $("#loading").hide();
                                   }, // Success function
                                 })
                           }
-                          if($(this).hasClass("fakecheckboxfilled")) {
-                            $(this).removeClass("fakecheckboxfilled");
+                          if($(this).hasClass("taskstatusComplete")) {
+                            $(this).removeClass("taskstatusComplete");
                             var status = 0;
                             checkboxupdate();
                           } else {
-                            $(this).addClass("fakecheckboxfilled");
+                            $(this).addClass("taskstatusComplete");
                             var status = 1;
                             checkboxupdate();
                           }
@@ -139,6 +162,7 @@ require_once('config.php');
                             taskid = $(this).attr('taskid');
                             userid = $(this).attr('userid');
                             date = $(this).attr('date');
+                            var workinghrs = $(this).parent().closest("td").attr("workinghrs");
 
                             //Ajax function
                             $.ajax({ url: 'remove_task.php',
@@ -149,7 +173,7 @@ require_once('config.php');
                                 },
                                 success: function(data) {
                                     alert(data);
-                                    $("#id" + date + userid).html("Loading").load("td_refresh.php", {date: date, userid: userid });
+                                    $("#id" + date + userid).html("Loading").load("td_refresh.php", {date: date, userid: userid, workinghrs: workinghrs });
                                 },
                                 error: function (data) {
                                     alert("There was an error. Image could not be added, please try again");
@@ -161,6 +185,7 @@ require_once('config.php');
                           $('#taskAdditionModal').modal('show');
                           var userid = $(this).attr('userid');
                           var date = $(this).attr('date');
+                          var workinghrs = $(this).parent().closest("td").attr("workinghrs");
 
 
 
@@ -185,7 +210,7 @@ require_once('config.php');
                                 success: function(e) {
                                     $("#modalloader").hide();
                                     $('#taskAdditionModal').modal('hide')
-                                    $("#id" + date + userid).html("Loading").load("td_refresh.php", {date: date, userid: userid });
+                                    $("#id" + date + userid).html("Loading").load("td_refresh.php", {date: date, userid: userid, workinghrs: workinghrs });
                                 },
                                 error: function (e) {
                                     alert("There was an error. Image could not be added, please try again");
