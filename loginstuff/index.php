@@ -106,13 +106,18 @@ if(isset($_SESSION['user_id'])){
 		top: 130px;
 		right: 50%;
 		left: 40%;
-		background: #000;
-		border: 1px solid #A32860;
+		background: #FFF;
 		font-family: courier new;
-		color: #fff;
+		color: #333;
 		padding: 20px;
 		width: 372px;
 		text-align: center;
+		border-radius: 10px;
+	}
+	a.googleLoginButton {
+		background: url("../img/google_login_btn.png") no-repeat !important;
+		width:313px;
+		height: 45px;
 	}
     </style>
     <body>
@@ -175,8 +180,8 @@ if(isset($_SESSION['user_id'])){
     }
 </script>
 <div class="login-container">
-<h1 class="login-header">Enter the Matrix</h1>
 	<div id="login-body">
+		<img src="../img/paradise_matrix.jpg"><br />
 		<a href="../index.php" />Go back to home...</a>
 		<?php if($person):?>
 			<div id="avatar" style="background-image:url(<?php echo $person->photo?>?sz=58)"></div>

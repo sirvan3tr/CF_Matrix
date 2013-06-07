@@ -31,9 +31,9 @@
     <div id="header-login" class="fr">
     <?php include("login_script.php"); ?>
     <?php if($person):?>
-      <div class="greeting">Welcome, <b><?php echo htmlspecialchars($person->name)?></b> <a href="?logout" class="logoutButton">Logout</a></div>
+      <div class="greeting">Welcome, <b><?php echo htmlspecialchars($person->name)?></b> <i class="icon-chevron-down icon-white"></i><a href="?logout" class="logoutButton">Logout</a></div>
     <?php else:?>
-        <div class="greeting"><a href="<?php echo $client->createAuthUrl()?>" class="googleLoginButton">Sign in with Google</a></div>
+        <div class="greeting"><a href="<?php echo $client->createAuthUrl()?>" class="googleLoginButton">Sign in with Google </a></div>
       <?php endif;?>
 
     </div>

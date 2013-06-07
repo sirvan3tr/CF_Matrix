@@ -1,7 +1,12 @@
 <?php
-require_once('header.php');
-require_once('config.php');
+  require_once('header.php');
+  require_once('config.php');
 ?>
+<div class="toggle-bar">Toggle: 
+  <span class="togglebarelement toggle-hrs">Toggle hours: <img src="img/on-btn.png"></span>
+  <span class="togglebarelement toggle-newtask">Toggle new task: <img src="img/on-btn.png"></span>
+  <span class="togglebarelement toggle-actions">Toggle actions: <img src="img/on-btn.png"></span>
+</div>
     <div class="container-fluid">
       <div class="row-fluid">
        
@@ -112,14 +117,22 @@ require_once('config.php');
       }, // Success function
     }).done(function(data){
                         //Toggle Hours
-                        $("#togglehrs").click(function () {
+                        /*
+                        $('.toggle-hrs').show();
+                          $('.toggle-hrs').toggle(function() {
+                            alert('First handler for .toggle() called.');
+                          }, function() {
+                            alert('Second handler for .toggle() called.');
+                          });
+*/
+                        $(".toggle-hrs").click(function () {
                           $(".totalend").toggle();
                         });
 
-                        $("#toggletasks").click(function () {
+                        $(".toggle-newtask").click(function () {
                           $(".task-addition").toggle();
                         });
-                        $("#toggleactions").click(function () {
+                        $(".toggle-actions").click(function () {
                           $(".actions").toggle();
                         });
 

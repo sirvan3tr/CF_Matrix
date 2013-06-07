@@ -261,21 +261,22 @@ body {
 	min-height: 30px;
 	padding-right: 20px;
 	padding-left: 20px;
-	background-color: #333;
+	background-color: #575f68;
 	//background: url(../img/cream_pixels.png);
 	//border-bottom: 1px solid #EEE;
 }
 .navbar .nav>li>a {
 	float: none;
-	padding: 5px 10px 10px;
+	padding: 5px 5px;
 	color: #fff;
 	text-decoration: none;
 	text-shadow: none;
 }
 .navbar .nav>li>a:focus, .navbar .nav>li>a:hover {
-	color: #333;
+	color: #FFF;
 	text-decoration: none;
-	background-color: #FFF;
+	border-bottom: 3px solid #e74c3c;
+	background-color: #575F68;
 }
 .taskstatus-Closed {
 	background-color: #F6FCF5;
@@ -301,11 +302,21 @@ body {
 }
 #header-login {
 	color: #fff;
-	padding: 5px;
+	padding: 5px 15px;
+	margin-right: -20px;
+	background: rgb(43,133,225); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(43,133,225,1) 0%, rgba(65,155,247,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(43,133,225,1)), color-stop(100%,rgba(65,155,247,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(43,133,225,1) 0%,rgba(65,155,247,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(43,133,225,1) 0%,rgba(65,155,247,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(43,133,225,1) 0%,rgba(65,155,247,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(43,133,225,1) 0%,rgba(65,155,247,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2b85e1', endColorstr='#419bf7',GradientType=0 ); /* IE6-9 */
+
 }
 #header-login a {
-	color: rgb(168, 226, 255);
-	text-decoration: underline;
+	color: #FFF;
+	text-decoration: none;
 }
 .navbar .brand {
 	display: block;
@@ -325,4 +336,27 @@ body {
 }
 .light {
 	color: #fff;
+}
+#login-body {
+	position: absolute;
+	top: 130px;
+	right: 50%;
+	left: 40%;
+	background: #FFF;
+	font-family: courier new;
+	color: #FFF;
+	padding: 20px;
+	width: 372px;
+	text-align: center;
+	border-radius: 10px;
+}
+.toggle-bar {
+	border: 1px solid #E4E4E4;
+	background-color: #FCFBFB;
+	margin: -5px 0 10px 0;
+	padding: 5px;
+}
+.togglebarelement {
+	margin: 0 20px;
+	cursor: pointer;
 }
