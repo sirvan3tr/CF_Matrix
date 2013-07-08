@@ -360,3 +360,20 @@ body {
 	margin: 0 20px;
 	cursor: pointer;
 }
+.on-off-btn {
+	background: url("../img/on-btn.png") no-repeat;
+	width: 48px;
+	height: 17px;
+	display: inline-block;
+}
+
+.on-off-btnOFF {
+	background: url("../img/off-btn.png") no-repeat;
+	width: 48px;
+	height: 17px;
+	display: inline-block;
+}
+.HomeDateFilter {
+	width: 290px;
+	display: inline-block;
+}

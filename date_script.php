@@ -78,7 +78,6 @@ do
                 $person = ORM::for_table('users')->find_one($_SESSION['user_id']);
                   if($_SESSION['user_id']==$userid) {
                     $isuseronline = '<li><a '.$taskstatusA.' href="" taskid="'.$rowtwo['taskrepID'].'"><i class="icon-check"></i> Completed</a></li>';
-
                   }
                 }
                 if ($rowtwo['comment']==null) {

@@ -4,7 +4,7 @@ include('setup.php');
 
 		 	$testdate = $_POST['date'];
 		 	$userid = $_POST['userid'];
-      $working_hrs = $_POST['working_hrs'];
+      $working_hrs = $_POST['workinghrs'];
 
 
 
@@ -15,7 +15,7 @@ include('setup.php');
           INNER JOIN skill_type ON task_repetition.skill_type_id=skill_type.id
           WHERE date='$testdate' && user_id='$userid' ");
 
-         echo '<td date="'.$testdate.'" userid="'.$userid.'" id="id'.$testdate.$userid.'" class="alltasks">';
+
          $taskhours = 0;
 
            while($rowtwo = mysqli_fetch_array($repetition))
@@ -24,10 +24,10 @@ include('setup.php');
 
                 if($rowtwo['rep_status']==1) {
                   $divtasksclass = 'class="tasks usertaskstatus-done"';
-                  $fakecheckboxclass = 'class="fakecheckbox fakecheckboxfilled fl"';
+                  $taskstatusA = 'class="taskstatusA taskstatusComplete fl"';
                 } else {
                   $divtasksclass = 'class="tasks"';
-                  $fakecheckboxclass = 'class="fakecheckbox fl"';
+                  $taskstatusA = 'class="taskstatusA fl"';
                 }
 
                 $person = null;
@@ -35,20 +35,40 @@ include('setup.php');
                 if(isset($_SESSION['user_id'])){
                 $person = ORM::for_table('users')->find_one($_SESSION['user_id']);
                   if($_SESSION['user_id']==$userid) {
-                    $isuseronline = '<div class="taskstatuscontainer" data-toggle="tooltip" data-original-title="Toggle the status of this task"><div '.$fakecheckboxclass.' taskid="'.$rowtwo['taskrepID'].'"></div><span></span></div>';
+                    $isuseronline = '<li><a '.$taskstatusA.' href="" taskid="'.$rowtwo['taskrepID'].'"><i class="icon-check"></i> Completed</a></li>';
                   }
                 }
+                if ($rowtwo['comment']==null) {
+                  $comment = "No Comment";
+                } else {
+                  $comment = $rowtwo['comment'];
+                }
 
-                echo '<div '.$divtasksclass.'><span class="matrixtaskname fl"><span data-toggle="tooltip" title="" data-original-title="' . $rowtwo['skill_full'] . '" class="matrixhours light" style="background-color:'.$rowtwo['color'].';">'. $rowtwo['skill'] . '</span> <a href="project.php?projectid=' . $rowtwo['id'] .  '">' . $rowtwo['project_name'] .  '</a></span><span class="matrixhours fr dark"><i class="icon-time"></i> ' . $rowtwo['duration'] . '</span>
+                echo '<div '.$divtasksclass.'><span class="matrixtaskname fl"><a href="project.php?projectid=' . $rowtwo['id'] .  '">' . $rowtwo['project_name'] .  '</a></span>
+                  <div class="taskhoursbig">'.$rowtwo['duration'].'</div>
+                  <div class="actions fl">
+                    <span class="matrixhours dark"><i class="icon-time"></i> ' . $rowtwo['duration'] . '</span>
+                    <span data-toggle="tooltip" title="" data-original-title="' . $rowtwo['skill_full'] . '" class="matrixhours light" style="background-color:'.$rowtwo['color'].';">'. $rowtwo['skill'] . '</span>
+                    <div class="btn-group">
+                      <button class="btn btn-mini">Action</button>
+                      <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a userid="' . $userid .'" date="'.$testdate.'" taskid="'.$rowtwo['taskrepID'].'" class="removetask" title="Remove this task." data-toggle="tooltip" data-original-title="Remove this task"><i class="icon-remove"></i> Delete</a></li>
+                        '.$isuseronline.'                      
+                      </ul>
+                    </div>
+                  </div>
                 <div class="clear"></div>
                 <div class="matrixdetails">
                   <a href="https://mail.google.com/mail/#inbox?compose=new" title="GMAIL Contact" target="_blank"><i class="icon-user"></i> ' . $rowtwo['firstname'] . ' ' . $rowtwo['surname'] .'</a> <br /> 
                   <i class="icon-globe"></i> <a href="' . $rowtwo['redmine_url'] . '" title="Redmine URL" target="_blank">Redmine URL</a>
                   <i class="icon-folder-open"></i> <a class="ndrivelink copy-button" data-clipboard-text="' . $rowtwo['n_url'] . '" title="Clients Drive Folder" target="_blank">N Drive</a>
-                  <i userid="' . $userid .'" date="'.$testdate.'" taskid="'.$rowtwo['taskrepID'].'"class="removetask icon-remove" title="Remove this task." data-toggle="tooltip" data-original-title="Remove this task."></i>
-                  <div class="thetaskcomment">' . $rowtwo['comment'] . '</div>
-                  '.$isuseronline.'
+                  <div class="thetaskcomment">'.$comment.'</div>
+
                 </div>
+
                 <div class="clear"></div>
                 </div>';
               }

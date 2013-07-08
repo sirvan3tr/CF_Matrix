@@ -3,18 +3,37 @@
   require_once('config.php');
 ?>
 <div class="toggle-bar">Toggle: 
-  <span class="togglebarelement toggle-hrs">Toggle hours: <img src="img/on-btn.png"></span>
-  <span class="togglebarelement toggle-newtask">Toggle new task: <img src="img/on-btn.png"></span>
-  <span class="togglebarelement toggle-actions">Toggle actions: <img src="img/on-btn.png"></span>
+  <span class="togglebarelement toggle-hrs">Toggle hours: <span class="on-off-btn"></span></span>
+  <span class="togglebarelement toggle-newtask">Toggle new task: <span class="on-off-btn"></span></span>
+  <span class="togglebarelement toggle-actions">Toggle actions: <span class="on-off-btn"></span></span>
+
+  <form class="form-inline HomeDateFilter">
+    <?php
+    /*$filterusers = ORM::for_table('users')->select('name')->find_many();*/
+
+
+    $todaysdate = date('Y-m-d');
+    $firstdate = date('Y-m-d', strtotime('-1 day', strtotime($todaysdate)));
+    $seconddate = date('Y-m-d', strtotime('+11 day', strtotime($todaysdate)));
+    echo '<input id="firstdate" type="text" placeholder="From y-m-d" value="'.$firstdate.'" class="input-small"> ';
+    echo '<input id="seconddate" type="text" placeholder="To y-m-d" value="'.$seconddate.'" class="input-small"> ';
+    /*
+    echo '<select>
+            <option>All users</option>';
+    foreach ($filterusers as $filterusers) {
+      echo '<option>'.htmlspecialchars($filterusers->name).'</option>';
+    }
+    echo '</select> ';
+    */
+    ?>
+    <button id="date_btn" class="btn btn-small btn-primary" type="button">Filter</button>
+  </form>
 </div>
     <div class="container-fluid">
       <div class="row-fluid">
        
         <div class="span12">
           <!--Body content-->
-          <button class="btn btn-small btn-primary" id="togglehrs">Toggle Total Hours</button>
-          <button class="btn btn-small btn-primary" id="toggletasks">Toggle Add new task</button>
-          <button class="btn btn-small btn-primary" id="toggleactions">Toggle Actions</button>
           <!-- Modal -->
           <div id="taskAdditionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-header">
@@ -56,29 +75,6 @@
               <button class="btn btn-primary newtask">Save changes</button>
             </div>
           </div><!-- end of modal -->
-
-          <form class="form-inline">
-            <?php
-            /*$filterusers = ORM::for_table('users')->select('name')->find_many();*/
-
-
-            $todaysdate = date('Y-m-d');
-            $firstdate = date('Y-m-d', strtotime('-1 day', strtotime($todaysdate)));
-            $seconddate = date('Y-m-d', strtotime('+11 day', strtotime($todaysdate)));
-            echo '<input id="firstdate" type="text" placeholder="From y-m-d" value="'.$firstdate.'" class="input-small"> ';
-            echo '<input id="seconddate" type="text" placeholder="To y-m-d" value="'.$seconddate.'" class="input-small"> ';
-            /*
-            echo '<select>
-                    <option>All users</option>';
-            foreach ($filterusers as $filterusers) {
-              echo '<option>'.htmlspecialchars($filterusers->name).'</option>';
-            }
-            echo '</select> ';
-            */
-            ?>
-            <button id="date_btn" class="btn btn-small btn-primary" type="button">Filter</button>
-          </form>
-              
               <div id="msg"></div>
         </div><!-- /span12 -->
       </div>
@@ -127,13 +123,16 @@
 */
                         $(".toggle-hrs").click(function () {
                           $(".totalend").toggle();
+                          $(this).find(".on-off-btn").toggleClass("on-off-btnOFF");
                         });
 
                         $(".toggle-newtask").click(function () {
                           $(".task-addition").toggle();
+                          $(this).find(".on-off-btn").toggleClass("on-off-btnOFF");
                         });
                         $(".toggle-actions").click(function () {
                           $(".actions").toggle();
+                          $(this).find(".on-off-btn").toggleClass("on-off-btnOFF");
                         });
 
 
