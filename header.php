@@ -13,6 +13,9 @@
     <link href="css/Style.css" rel="stylesheet">
 
     <link href="plugins/Metro-UI-CSS-master/css/modern.css" rel="stylesheet">
+
+    <script src="js/jquery.event.drag-2.2.js"></script>
+    <script src="js/jquery.event.drop-2.2.js"></script>
     
     
   </head>
