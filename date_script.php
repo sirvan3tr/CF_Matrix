@@ -17,7 +17,7 @@ $test_date = $start_date;
 $day_incrementer = 1; 
 include('config.php');
 include('setup.php');
-echo '<table class="table table-hover" border="0">';
+echo '<table class="table" border="0">';
 echo '<tr>';
 echo '<td class="dateheader"></td>';
 $resultone = mysqli_query($con,"SELECT * FROM users");
@@ -86,7 +86,7 @@ do
                   $comment = $rowtwo['comment'];
                 }
 
-                echo '<div '.$divtasksclass.'><span class="matrixtaskname fl"><a href="project.php?projectid=' . $rowtwo['id'] .  '">' . $rowtwo['project_name'] .  '</a></span>
+                echo '<div '.$divtasksclass.' taskid="'.$rowtwo['taskrepID'].'"><span class="matrixtaskname fl"><a href="project.php?projectid=' . $rowtwo['id'] .  '">' . $rowtwo['project_name'] .  '</a></span>
                   <div class="taskhoursbig">'.$rowtwo['duration'].'</div>
                   <div class="actions fl">
                     <span class="matrixhours dark"><i class="icon-time"></i> ' . $rowtwo['duration'] . '</span>
